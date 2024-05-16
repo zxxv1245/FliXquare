@@ -4,7 +4,7 @@
 ## Team Name : Plus + 
 ## App Name : FliXquare
 
-## https://meeting.ssafy.com/s11p01c01/pl/94gtgs3gxfrbtqwa79ohkzw8cc
+## https://verbena-marjoram-995.notion.site/Final-Project-aa3eaefea3ef421d97ef60f7bf798a72?pvs=4
 
 ## 그라운드 룰
   1. 아침 회의 9시부터 (1시정도) 
