@@ -1,4 +1,4 @@
-# fanal-pjt
+# Final-pjt
 
 ## Team Name : Plus + 
 ## App Title : FLIXQUARE
