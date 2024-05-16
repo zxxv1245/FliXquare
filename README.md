@@ -1,7 +1,7 @@
 # Final-pjt
 
 ## Team Name : Plus + 
-## App Title : FLIXQUARE
+## App Name : FLIXQUARE
 
 ## 그라운드 룰
   1. 아침 회의 9시부터 (1시정도) 
@@ -35,6 +35,7 @@
   - **MovieDB(Now Playing, Popular),GenreDB : 박민철**
   - **비로그인 페이지 + 프로필 설정 View,Components : 이주호**
   - **로그인 페이지(Movie List, Now Playing, Popular)View,Components : 박민철**
+  - **Notion 작성 : 박민철**
 ## 2. 목표 서비스 구현 및 실제 구현 정도 (24.05.18 ~ 기한 전까지 진행) [주말에도 진행 가능]
 
 ## 3. 데이터베이스 모델링 (ERD) (24.05.17 진행)
