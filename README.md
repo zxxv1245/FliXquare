@@ -4,7 +4,7 @@
 ## Team Name : Plus + 
 ## App Name : FliXquare
 
-## https://www.notion.so/Python-Final-Project-Netflix-Clone-Coding-e68b46e9e3a0442aadcc2d7307d41db8
+## https://meeting.ssafy.com/s11p01c01/pl/94gtgs3gxfrbtqwa79ohkzw8cc
 
 ## 그라운드 룰
   1. 아침 회의 9시부터 (1시정도) 
