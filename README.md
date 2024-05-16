@@ -1,5 +1,8 @@
 # fanal-pjt
 
+## Team Name : Plus + 
+## App Title : FLIXQUARE
+
 ## 그라운드 룰
   1. 아침 회의 9시부터 (1시정도) 
   2. 마감 회의 17시부터 (30분정도),5시 이후 code 작성 금지
