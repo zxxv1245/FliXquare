@@ -1,9 +1,7 @@
 <template>
   <div>
-    <h2>HomeMainInfo</h2>
-   
+    <h2>ArticleCard</h2>
   </div>
-
 </template>
 
 <script setup>

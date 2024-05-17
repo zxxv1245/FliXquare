@@ -1,9 +1,7 @@
 <template>
   <div>
-    <h2>HomeMainInfo</h2>
-   
+    <h1>GenreUpdateView</h1>
   </div>
-
 </template>
 
 <script setup>

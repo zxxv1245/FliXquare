@@ -8,6 +8,11 @@ import MovieView from '@/views/YesLogin/MovieView.vue'
 import PopularView from '@/views/YesLogin/PopularView.vue'
 import ProfileView from '@/views/YesLogin/ProfileView.vue'
 import StoreView from '@/views/YesLogin/StoreView.vue'
+import ProfileUpdateView from '@/views/YesLogin/ProfileUpdateView.vue'
+import GenreUpdateView from '@/views/YesLogin/GenreUpdateView.vue'
+import ArticleCreateView from '@/views/YesLogin/ArticleCreateView.vue'
+import ArticleDetailView from '@/views/YesLogin/ArticleDetailView.vue'
+import ArticleUpdateView from '@/views/YesLogin/ArticleUpdateView.vue'
 
 
 const router = createRouter({
@@ -31,7 +36,26 @@ const router = createRouter({
     {
       path : '/articles',
       name : 'ArticlesView',
-      component : ArticlesView
+      component : ArticlesView,
+      children : [
+        {
+          path : 'articlecreate',
+          name : 'ArticleCreateView',
+          component : ArticleCreateView
+        },
+        {
+          path : 'articledetail',
+          name : 'ArticleDetailView',
+          component : ArticleDetailView,
+          children : [
+            {
+              path : 'articleupdate',
+              name : 'ArticleUpdateView',
+              component : ArticleUpdateView
+            }
+          ]
+        }
+      ]
     },
     {
       path : '/latest',
@@ -51,13 +75,25 @@ const router = createRouter({
     {
       path : '/profile',
       name : 'ProfileView',
-      component : ProfileView
+      component : ProfileView,
+      children : [
+        {
+          path : 'profileupdate',
+          name : 'ProfileUpdateView',
+          component : ProfileUpdateView
+        },
+        {
+          path : 'genreupdate',
+          name : 'GenreUpdateView',
+          component : GenreUpdateView
+        }
+      ]
     },
     {
       path : '/store',
       name : 'StoreView',
       component : StoreView
-    },
+    }
   ]
 })
 

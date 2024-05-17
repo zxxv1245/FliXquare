@@ -1,9 +1,7 @@
 <template>
   <div>
-    <h2>HomeMainInfo</h2>
-   
+    <h2>MovieLatest</h2>
   </div>
-
 </template>
 
 <script setup>

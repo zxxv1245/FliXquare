@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>LoginView</h1>
+    <h2>HomeSubOneInfo</h2>
   </div>
 </template>
 

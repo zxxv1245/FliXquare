@@ -1,9 +1,7 @@
 <template>
   <div>
-    <h2>HomeMainInfo</h2>
-   
+    <h1>ProfileUpdateView</h1>
   </div>
-
 </template>
 
 <script setup>
