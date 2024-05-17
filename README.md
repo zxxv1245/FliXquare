@@ -32,13 +32,22 @@
 
 ## 페이지 구성
 
+div v-show=”is_authenticated”로 제어할 것임.
+
 ### ! 비로그인 페이지 (구성 완)
 
 - **네비게이션 바 (메인 페이지, 회원가입 페이지, 로그인 페이지)**
     - MainView (HomeView) → (Components) Main Info, sub info (App info 1, 2, 3)
+        - **MainInfo : “당신의 영화 여정을 함께할 커뮤니티”**
+            - 최신 영화 소식, 리뷰, 토론 그리고 더 많은 것들을 즐기세요.
+        - **SubInfo1 : “최신 인기영화를 한눈에!”**
+            - 최신 흥행작부터 기대작 예고, 각종 영화 이야기까지 한눈에! 유저 기반 다양한 영화 소식을 쉽고 빠르게 접할 수 있습니다!
+        - **SubInfo2 : “”**
+            - 
+        - **SubInfo2 : “”**
+            - 
     - SignupView (SignupView) → (Components) Signup Form 활용(submit 이후 router.push) [ Children : Genre_select / user-genre table을 통해서 유저 맞춤 추천 장르 3개 선택 ]
     - LoginView (LoginView) → (Components) Login Form 활용
-- MainView (HomeView) → Main Info, sub info (App info 1, 2, 3)
 
 ### ! 로그인 페이지
 
@@ -46,16 +55,18 @@
     - MainView (MovieView) → (Components) UserRecommend, Latest, Top 10, Genre 1, 2, 3
     - LatestView (LatestView) → (Components) Page 당 10 영화 렌더
     - PopularView (PopularView) → (Components) Page 당 10 영화 렌더 (기존 MovieList + 좋아요 우선 순위)
-    - StoreView (StoreView) → (Components) Page 당 10 영화 렌더 (기존 찜 목록 추가, 제거 방식)
-    - ProfileView (ProfileView) → (Components) MainInfo, InfoUpdate, GenreUpdate, StoreView(RouteLink)
+    - FavoriteView(FavoriteView) → (Components) Page 당 10 영화 렌더 (기존 찜 목록 추가, 제거 방식)
+    - ArticlesView(ArticlesView) → (Components) 자유게시판, 리뷰게시판
+    - ProfileView (ProfileView) → MainInfo(Components), InfoUpdate(View), GenreUpdate(View), StoreView(RouteLink)
+        - 내 글 보기(Components)
 
 - **MainView**
     - 메인 페이지의 메인 컴포넌트 : **“오늘을 기준으로 일주일 전까지의 반응이 많은 영화들 중 제일 반응이 많은 영화[0]”**
     1. **DB preference (장르 선호도)**
-        - **유저 별 추천 영화 10선** (1 섹션) > 아직 추천 알고리즘 구상중…
-        - **전체 유저 좋아요 순** > (1 섹션) : 처음에 불러올 때, “**Main Movie List DB” (좋아요 : 0 일때, Popularity기준으로 정렬, 이후 “좋아요” 우선 순위)**
-        - **최신 영화** > (1 섹션) : 처음에 불러올 때, **Now Playing DB(좋아요 : 0 일때, Popularity기준으로 정렬, 이후 “좋아요” 우선 순위)**
-        - **선호도 장르** > (3 섹션) : 장르 목록에서 > 장르 3개를 “**Main Movie List DB “(좋아요 : 0 일때, Popularity기준으로 정렬, 이후 “좋아요” 우선 순위)**
+        - **전체 유저 좋아요 10선** > (1 섹션) : 처음에 불러올 때, “**Main Movie List DB” (좋아요 : 0 일때, Popularity기준으로 정렬, 이후 “좋아요” 우선 순위)** (10)
+        - **유저 별 추천 영화** (1 섹션) > **“사용자 추천 알고리즘 - AI가 추천하는 알고리즘(내가 좋아하는 장르는 “ㅇ, ㅇ, ㅇ”)과 인기도(Popularity)를 기준으로”** (18)
+        - **최신 영화** > (1 섹션) : 처음에 불러올 때, **Now Playing DB(좋아요 : 0 일때, Popularity기준으로 정렬, 이후 “좋아요” 우선 순위)** (18)
+        - **선호도 장르** > (3 섹션) : 장르 목록에서 > 장르 3개를 “**Main Movie List DB “(좋아요 : 0 일때, Popularity기준으로 정렬, 이후 “좋아요” 우선 순위)** (18)
 - **DetailModalView**
     - 영화 상세 페이지를 보았을 때, DetailInfo 보여주기 (예고편, Title, Content, Rate, likes, comments)
     - 반응(Comment) 작성 기능 있음
@@ -69,9 +80,44 @@
   - **로그인 페이지(Movie List, Now Playing, Popular)View,Components : 박민철**
   - **Notion 작성 : 박민철**
 ## 2. 목표 서비스 구현 및 실제 구현 정도 (24.05.18 ~ 기한 전까지 진행) [주말에도 진행 가능]
+- [x]  (24.05.02 전체적인 PJT 이해 회의)
+- [x]  (24.05.13 전체적인 PJT 이해 회의)
+    
+    다음에 회의할 내용 : 페이지 구성, DB Table (ERD 구성) 
+    
+- [x]  (24.05.16 전체적인 PJT 이해 회의)
+    - [x]  프로젝트 설계 하기
+        - [x]  Main DB, Sub DB (TMDB)
+        - [ ]  유저 추천 알고리즘 설계 (유저 추천 알고리즘을 작성 못함)
+        - [x]  전체 URL 구성 (routing)
+        - [x]  페이지 전체 구성 (Views, Components) [BE]
+    - [x]  DB ERD 구성 (프로필, 영화 별 반응(댓글))
+    - [x]  일정 계획 상세 작성 : (책임자 분류) (★★★★★)
+    - [x]  개인적으로 SQL-D 공부하기 (★★★★ << 이거 진짜 중요 (5만원 나감))
+- [x]  (24.05.17 전체적인 PJT 이해 회의)
+    - [x]  전체 URL, Views, Components 구성 보충 (routing)
+    - [x]  전체 DB ERD 구성 (전체 영화 리스트, …)
+    - [x]  Detail URL 구성, UI/UX 구성 (CSS, HTML Form)
+    - [x]  AI 사용처 구상 (Chatbot? 어떻게 활용???)
+    - [x]  유저 추천 알고리즘 설계 (★★★★) (필수적!!!) → JS setTimeout(), watch 혹은 computed를 사용해서 계속 호출 못하게
+    - [x]  Movie List DB 긁어다가 fixture화 시키기 (여유 있으면 // 더미 생성 완료)
+- [ ]  (24. 05. 18 ~ 19 주말 간 진행)
+    - [ ]  ㅇㄹ
+    - [ ]  ㅇㄹ
+    - [ ]  ㅇㄹ
+    - [ ]  ㅇㄹ
+    - [ ]  ㅇㄹ
+    - [ ]  
 
+---
+
+- [ ]  (24.05.20 주말 간 진행사항 공유, 오늘 진행할 리스트 업)
+    - [ ]  주말 간 진행사항 확인 (목업 마무리된 거 확인하기)
+    - [ ]  서로 비로그인, 로그인 페이지 구성하기
+        - [ ]  비로그인 페이지 진행사항 ::
+        - [ ]  로그인 페이지 진행사항 ::
 ## 3. 데이터베이스 모델링 (ERD) (24.05.17 진행)
-
+![Netflix Clone PJT.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/3acb8654-86f6-4404-87e1-1a889a75d7b4/9551d08f-40cb-4c93-b305-d562fd9f345e/Netflix_Clone_PJT.png)
 ## 4. 영화 추천 알고리즘에 대한 기술적 설명 (24.05.17~기한 전까지 진행)
 
 ## 5. 핵심 기능에 대한 설명 (24.05.16 진행 ~ 기한 전까지 세부 기능 추가)
