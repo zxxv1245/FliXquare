@@ -117,7 +117,7 @@ div v-show=”is_authenticated”로 제어할 것임.
         - [ ]  비로그인 페이지 진행사항 ::
         - [ ]  로그인 페이지 진행사항 ::
 ## 3. 데이터베이스 모델링 (ERD) (24.05.17 진행)
-![](./erd/Netflix_Clone_PJT.png)
+![](./erd/Netflix Clone PJT.png)
 
 ## 4. 영화 추천 알고리즘에 대한 기술적 설명 (24.05.17~기한 전까지 진행)
 
