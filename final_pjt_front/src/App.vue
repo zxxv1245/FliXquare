@@ -23,3 +23,16 @@
 <style scoped>
 
 </style>
+
+<style>
+@font-face {
+    font-family: 'ONE-Mobile-Title';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-Title.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+  font-family: ONE-Mobile-Title;
+}
+</style>
