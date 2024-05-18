@@ -13,7 +13,6 @@ import LoginForm from '@/components/LoginForm.vue';
   display: flex;
   justify-content: center; /* 가로 가운데 정렬 */
   align-items: center;    /* 세로 가운데 정렬 */
-  height: 100vh;          /* 부모 요소의 높이를 100% 뷰포트 높이로 설정 */
 }
 
 .thisisimg {

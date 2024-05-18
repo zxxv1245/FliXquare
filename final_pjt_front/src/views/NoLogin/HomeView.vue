@@ -1,11 +1,10 @@
 <template>
   <div>
     <HomeMainInfo/>
-    <hr class = "HomeViewhr">
     <HomeSubOneInfo/>
-    <hr class = "HomeViewhr">
+    <div class = "HomeViewdiv"></div>
     <HomeSubTwoInfo/>
-    <hr class = "HomeViewhr">
+    <div class = "HomeViewdiv"></div>
     <HomeSubThreeInfo/>
   </div>
 </template>
@@ -18,9 +17,11 @@ import HomeSubThreeInfo from '@/components/HomeSubThreeInfo.vue';
 </script>
 
 <style scoped>
-.HomeViewhr {
-  padding: 5px;
-  background-color: rgb(195, 195, 195);
+
+.HomeViewdiv {
+  padding: 3px;
+  background-color: rgb(124, 124, 124);
+  margin:0px ;
 }
 
 </style>
