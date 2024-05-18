@@ -1,18 +1,18 @@
 <template>
   <body>
-    <nav>
+    <nav v-if = "route.name !== 'GenreUpdateView'">
       <div>
-        <RouterLink :to = "{name : 'HomeView'}"><img src="@/assets/FliXquareLogo.png" alt="" class = "logoClass"></RouterLink>
-        <RouterLink :to = "{name : 'MovieView'}">Movie</RouterLink> 
-        <RouterLink :to = "{name : 'LatestView'}">Latest</RouterLink> 
-        <RouterLink :to = "{name : 'PopularView'}">Popular</RouterLink>
-        <RouterLink :to = "{name : 'StoreView'}">Store</RouterLink>
+        <RouterLink :to = "{name : 'HomeView'}" v-if = "!store.isLogin"><img src="@/assets/FliXquareLogo.png" alt="" class = "logoClass"></RouterLink>
+        <RouterLink :to = "{name : 'MovieView'}" v-if = "store.isLogin"><img src="@/assets/FliXquareLogo.png" alt="" class = "logoClass"></RouterLink> 
+        <RouterLink :to = "{name : 'LatestView'}" v-if = "store.isLogin">Latest</RouterLink> 
+        <RouterLink :to = "{name : 'PopularView'}" v-if = "store.isLogin">Popular</RouterLink>
+        <RouterLink :to = "{name : 'StoreView'}" v-if = "store.isLogin">Store</RouterLink>
       </div>
       <div>
-        <RouterLink :to = "{name : 'ArticlesView'}">Articles</RouterLink> 
-        <RouterLink :to = "{name : 'ProfileView'}">Profile</RouterLink> 
-        <button @click = "signup" class = "btnClass">회원가입</button>
-        <button @click = "login" class = "btnClass">로그인</button>
+        <RouterLink :to = "{name : 'ArticlesView'}" v-if = "store.isLogin">Articles</RouterLink> 
+        <RouterLink :to = "{name : 'ProfileView'}" v-if = "store.isLogin">Profile</RouterLink> 
+        <button @click = "signup" class = "btnClass" v-if = "!store.isLogin">회원가입</button>
+        <button @click = "login" class = "btnClass" v-if = "!store.isLogin">로그인</button>
       </div>
     </nav>
     <RouterView/>
@@ -21,10 +21,12 @@
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { useRouter } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
+import { useCounterStore } from './stores/counter';
 
+const store = useCounterStore()
 const router = useRouter()
-
+const route = useRoute()
 
 const signup = function() {
   router.push({name : 'SignupView'})
@@ -82,5 +84,6 @@ nav a {
   border-radius: 15%;
   margin-left: 10px;
   margin-right: 10px;
+  border: 0px;
 }
 </style>

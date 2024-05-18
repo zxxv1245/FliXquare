@@ -81,11 +81,6 @@ const router = createRouter({
           path : 'profileupdate',
           name : 'ProfileUpdateView',
           component : ProfileUpdateView
-        },
-        {
-          path : 'genreupdate',
-          name : 'GenreUpdateView',
-          component : GenreUpdateView
         }
       ]
     },
@@ -93,6 +88,11 @@ const router = createRouter({
       path : '/store',
       name : 'StoreView',
       component : StoreView
+    },
+    {
+      path : '/genreupdate',
+      name : 'GenreUpdateView',
+      component : GenreUpdateView
     }
   ]
 })

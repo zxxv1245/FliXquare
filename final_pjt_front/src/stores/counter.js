@@ -8,7 +8,13 @@ export const useCounterStore = defineStore('counter', () => {
   const router = useRouter()
   const token = ref(null)
   const userGenre = ref(null)
-
+  const isLogin = computed(() => {
+    if (token.value === null) {
+      return false
+    } else {
+      return true
+    }
+  })
   // 회원가입
   const signUp = function (payload) {
     const { username, password1, password2 } = payload
@@ -27,6 +33,7 @@ export const useCounterStore = defineStore('counter', () => {
       logIn({ username, password })
       })
       .catch((error) => {
+      console.log('회원가입 실패ㅠ')
       console.log(error)
       })
   }
@@ -54,6 +61,7 @@ export const useCounterStore = defineStore('counter', () => {
         }
       })
       .catch((error) => {
+        console.log('로그인 실패ㅠ')
         console.log(error)
       })
   }
@@ -61,6 +69,7 @@ export const useCounterStore = defineStore('counter', () => {
     API_URL,
     token,
     userGenre,
+    isLogin,
     signUp,
     logIn
   }
