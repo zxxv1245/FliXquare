@@ -10,9 +10,13 @@ from rest_framework.permissions import IsAuthenticated,IsAdminUser
 from django.shortcuts import get_object_or_404, get_list_or_404
 
 
+# Class Load
+from .models import Movie
+from .serializers import MovieListSerializer
 
 # Create your views here.
-
-
+@api_view(['GET'])
 def movie_list(request) :
-    pass
+    movies = get_list_or_404(Movie)
+    serializer = MovieListSerializer(movies, many = True)
+    return Response(serializer.data)

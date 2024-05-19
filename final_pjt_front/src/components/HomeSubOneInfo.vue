@@ -17,8 +17,9 @@
   align-items: center;    
   justify-content: center;
   font-size: 30px;
-  background-color: rgb(43, 43, 43);
+  background-color: rgb(25, 25, 25, 0.5);
   color: white;
   height: 400px;
+  text-align: center;
 }
 </style>

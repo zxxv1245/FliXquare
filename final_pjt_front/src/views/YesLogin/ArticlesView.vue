@@ -1,6 +1,9 @@
 <template>
   <div>
     <h1>ArticlesView</h1>
+    <span>
+      
+    </span>
     <RouterLink :to = "{name : 'ArticleCreateView'}">ArticleCreate</RouterLink> | 
     <RouterLink :to = "{name : 'ArticleDetailView'}">ArticleDetail</RouterLink> | 
     

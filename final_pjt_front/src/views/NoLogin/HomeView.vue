@@ -1,6 +1,7 @@
 <template>
   <div>
     <HomeMainInfo/>
+    <div class = "HomeViewdiv"></div>
     <HomeSubOneInfo/>
     <div class = "HomeViewdiv"></div>
     <HomeSubTwoInfo/>
@@ -20,7 +21,7 @@ import HomeSubThreeInfo from '@/components/HomeSubThreeInfo.vue';
 
 .HomeViewdiv {
   padding: 3px;
-  background-color: rgb(124, 124, 124);
+  background-color: rgba(50, 50, 50, 0.95);
   margin:0px ;
 }
 

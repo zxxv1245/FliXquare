@@ -65,6 +65,9 @@ export const useCounterStore = defineStore('counter', () => {
         console.log(error)
       })
   }
+
+
+  
   return {
     API_URL,
     token,

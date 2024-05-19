@@ -1,27 +1,29 @@
 <template>
-  <body>
+  <main>
     <nav v-if = "route.name !== 'GenreUpdateView'">
       <div>
         <RouterLink :to = "{name : 'HomeView'}" v-if = "!store.isLogin"><img src="@/assets/FliXquareLogo.png" alt="" class = "logoClass"></RouterLink>
         <RouterLink :to = "{name : 'MovieView'}" v-if = "store.isLogin"><img src="@/assets/FliXquareLogo.png" alt="" class = "logoClass"></RouterLink> 
-        <RouterLink :to = "{name : 'LatestView'}" v-if = "store.isLogin">Latest</RouterLink> 
-        <RouterLink :to = "{name : 'PopularView'}" v-if = "store.isLogin">Popular</RouterLink>
-        <RouterLink :to = "{name : 'StoreView'}" v-if = "store.isLogin">Store</RouterLink>
+        <RouterLink :to = "{name : 'LatestView'}" v-if = "store.isLogin">최신 영화 목록</RouterLink> 
+        <RouterLink :to = "{name : 'PopularView'}" v-if = "store.isLogin">인기 영화</RouterLink>
+        <RouterLink :to = "{name : 'StoreView'}" v-if = "store.isLogin">내 찜 목록</RouterLink>
+        <RouterLink :to = "{name : 'ArticlesView'}" v-if = "store.isLogin">커뮤니티</RouterLink> 
       </div>
       <div>
-        <RouterLink :to = "{name : 'ArticlesView'}" v-if = "store.isLogin">Articles</RouterLink> 
-        <RouterLink :to = "{name : 'ProfileView'}" v-if = "store.isLogin">Profile</RouterLink> 
+        <RouterLink :to = "{name : 'ProfileView'}" v-if = "store.isLogin">프로필</RouterLink> 
         <button @click = "signup" class = "btnClass" v-if = "!store.isLogin">회원가입</button>
         <button @click = "login" class = "btnClass" v-if = "!store.isLogin">로그인</button>
       </div>
     </nav>
-    <RouterView/>
-  </body>
+    <div class="main">
+      <RouterView/>
+    </div>
+  </main>
 </template>
 
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { useRoute,useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useCounterStore } from './stores/counter';
 
 const store = useCounterStore()
@@ -35,10 +37,15 @@ const login = function() {
   router.push({name : 'LoginView'})
 }
 
+
 </script>
 
 <style scoped>
+main {
+  display: flex;
+  justify-content: center;
 
+}
 </style>
 
 <style>
@@ -51,6 +58,12 @@ const login = function() {
 
 body {
   font-family: ONE-Mobile-Title;
+  background-color: rgba(15, 15, 15, 1);
+  margin: 0px;
+}
+
+.main {
+  width: 100%;
 }
 
 nav {
@@ -59,8 +72,8 @@ nav {
   justify-content: space-between;
   background: linear-gradient(to top, rgba(57, 57, 57, 0), rgba(0, 0, 0, 1));
   font-size: 20px;
-  padding: 20px;
-  width: 95%;
+  padding: 1rem;
+  width: 96%;
 }
 
 nav a {
