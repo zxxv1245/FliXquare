@@ -10,9 +10,10 @@
         <RouterLink :to = "{name : 'ArticlesView'}" v-if = "store.isLogin">커뮤니티</RouterLink> 
       </div>
       <div>
-        <RouterLink :to = "{name : 'ProfileView'}" v-if = "store.isLogin">프로필</RouterLink> 
+        <RouterLink :to = "{name : 'ProfileView'}" v-if = "store.isLogin" >프로필</RouterLink> 
         <button @click = "signup" class = "btnClass" v-if = "!store.isLogin">회원가입</button>
         <button @click = "login" class = "btnClass" v-if = "!store.isLogin">로그인</button>
+        <button @click = "logout" class = "btnClass" v-if = "store.isLogin && route.name === 'ProfileView'">로그아웃</button>
       </div>
     </nav>
     <div class="main">
@@ -35,6 +36,11 @@ const signup = function() {
 }
 const login = function() {
   router.push({name : 'LoginView'})
+}
+
+const logout = function() {
+  router.push({name : 'HomeView'})
+  store.logOut()
 }
 
 

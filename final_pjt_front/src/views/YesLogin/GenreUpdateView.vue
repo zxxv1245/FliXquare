@@ -3,8 +3,26 @@
     <h1>선호 장르 선택</h1>
     <div class = "middleparent">
       <div class = "child">
-        <div class = "childchild">선호 장르</div>
-        <div class = "childchild">전체 장르</div>
+        <draggable
+          v-model = "counterStore.userGenre"
+          group = "genres"
+          tag = "div"
+          class="childchild"
+          animation="300">
+          <template #item = "{ element : mygenre}">
+            <div class = 'draggablediv'>{{ mygenre }}</div>
+          </template>
+        </draggable>
+        <draggable
+          v-model = "counterStore.genres"
+          group = "genres"
+          tag = "div"
+          class="childchild"
+          animation="300">
+          <template #item = "{ element : genre}">
+            <div class = 'draggablediv'>{{ genre }}</div>
+          </template>
+        </draggable>
       </div>
       <button class = "GenrebtnClass" @click = "goMovie">다음으로</button>
     </div>
@@ -12,10 +30,18 @@
 </template>
 
 <script setup>
+import { ref,onMounted } from 'vue'
 import { useRoute,useRouter } from 'vue-router';
+import { useCounterStore } from '@/stores/counter'
+import draggable from 'vuedraggable'
 
+const counterStore = useCounterStore()
 const router = useRouter()
 const route = useRoute()
+
+onMounted(() => {
+  counterStore.getGenre()
+})
 
 const goMovie = function() {
   router.push({name : "MovieView"})
@@ -73,5 +99,15 @@ const goMovie = function() {
   border: 0px;
   margin-top: auto;
   margin-bottom: 0px;
+}
+
+.draggablediv { 
+  background-color: rgb(99, 99, 99,0.8);
+  margin: 5px;
+  display: inline-block;
+  width: 120px;
+  height: 30px;
+  text-align: center;
+  padding-top: 10px;
 }
 </style>

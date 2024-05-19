@@ -7,7 +7,29 @@ export const useCounterStore = defineStore('counter', () => {
   const API_URL = 'http://127.0.0.1:8000'
   const router = useRouter()
   const token = ref(null)
-  const userGenre = ref(null)
+  const userGenre = ref([
+  ])
+  const genres = ref([])
+
+  const getGenre = function() {
+    axios({
+      method : 'get',
+      url : `${API_URL}/api/v1/genres/`
+    })
+      .then(res => {
+        const dummyGenres = ref([])
+        res.data.forEach((genre) => {
+          if (!userGenre.value.includes(genre.name) ) {
+            dummyGenres.value.push(genre.name)
+          }
+        })
+        genres.value = dummyGenres.value
+      })
+      .catch(e => {
+        console.log('실패',e)
+      })
+    }
+
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -33,8 +55,7 @@ export const useCounterStore = defineStore('counter', () => {
       logIn({ username, password })
       })
       .catch((error) => {
-      console.log('회원가입 실패ㅠ')
-      console.log(error)
+      window.alert('회원가입 실패ㅠ')
       })
   }
 
@@ -54,26 +75,31 @@ export const useCounterStore = defineStore('counter', () => {
         //3. 로그인 성공 후 응답 받은 토큰을 저장
         console.log('로그인 성공!')
         token.value = response.data.key
-        if (userGenre.value === null) {
+        if (userGenre.value.length === 0) {
           router.push({ name : 'GenreUpdateView' })
         } else {
           router.push({ name : 'MovieView' })
         }
       })
       .catch((error) => {
-        console.log('로그인 실패ㅠ')
-        console.log(error)
+        window.alert('로그인 실패ㅠ')
       })
   }
 
-
+  const logOut = function() {
+    token.value = null
+    userGenre.value = []
+  }
   
   return {
     API_URL,
     token,
     userGenre,
     isLogin,
+    genres,
     signUp,
-    logIn
+    logIn,
+    getGenre,
+    logOut
   }
 }, { persist: true })

@@ -1,9 +1,7 @@
 <template>
   <div>
-    <h1>ProfileView</h1>
-    <RouterLink :to = "{name : 'ProfileUpdateView'}">ProfileUpdateView</RouterLink> | 
-    <RouterLink :to = "{name : 'GenreUpdateView'}">GenreUpdateView</RouterLink> | 
-    <RouterLink :to = "{name : 'StoreView'}">StoreView</RouterLink>
+    <ProfileMainInfo/>
+    <RouterLink :to = "{name : 'ProfileUpdateView'}">ProfileUpdateView</RouterLink>
     
   </div>
   <RouterView/>
@@ -11,6 +9,7 @@
 
 <script setup>
   import { RouterLink,RouterView } from 'vue-router'
+  import ProfileMainInfo from '@/components/ProfileMainInfo.vue';
 </script>
 
 <style scoped>
