@@ -72,13 +72,12 @@ const router = createRouter({
       path : '/profile',
       name : 'ProfileView',
       component : ProfileView,
-      children : [
-        {
-          path : 'profileupdate',
-          name : 'ProfileUpdateView',
-          component : ProfileUpdateView
-        }
-      ]
+      
+    },
+    {
+      path : '/profileupdate',
+      name : 'ProfileUpdateView',
+      component : ProfileUpdateView
     },
     {
       path : '/store',

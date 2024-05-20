@@ -57,6 +57,7 @@ export const useArticleStore = defineStore('article', () => {
       data : {title,content}
     })
       .then(res =>{
+        router.push({name : 'ArticlesView'})
         // console.log('create성공')
       })
       .catch(e => {

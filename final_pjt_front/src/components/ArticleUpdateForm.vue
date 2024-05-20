@@ -29,16 +29,11 @@ const content = ref(null)
 
 onMounted(()=>{
   articleStore.updateArticle(route.params.articleId)
+  title.value = articleStore.updateTitle
+    content.value = articleStore.updateContent
 })
 
-watch(() => articleStore.article.value, (newArticle) => {
-  if (newArticle) {
-    title.value = newArticle.title
-    content.value = newArticle.content
-    console.log(title.value)
 
-  }
-})
 
 </script>
 
