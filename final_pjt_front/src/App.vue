@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="d-flex flex-column align-items-center">
     <nav v-if = "route.name !== 'GenreUpdateView'" class="nav">
       <div>
         <RouterLink :to = "{name : 'HomeView'}" v-if = "!store.isLogin"><img src="@/assets/FliXquareLogo.png" alt="" class = "logoClass"></RouterLink>
@@ -47,12 +47,6 @@ const logout = function() {
 </script>
 
 <style scoped>
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-}
 </style>
 
 <style>
@@ -79,7 +73,7 @@ nav {
   justify-content: space-between !important;
   background: linear-gradient(to top, rgba(57, 57, 57, 0), rgba(0, 0, 0, 1)) !important;
   padding: 1rem !important;
-  width: 96% !important;
+  width: 100% !important;
 }
 
 nav a {

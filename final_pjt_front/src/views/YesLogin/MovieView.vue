@@ -26,7 +26,6 @@ const moviestore = useMoviestore()
 
 onMounted(() => {
   moviestore.fillMovies()
-  moviestore.fillLatest()
   moviestore.getGenre()
 })
 
