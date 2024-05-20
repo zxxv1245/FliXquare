@@ -33,14 +33,12 @@
 ## 페이지 구성
 ### Router and Component
 
-**※ 붉은 색 글자는 공통으로 사용되는 Component**
-
 | Path | Component | Desciption | Child-Component |
 | --- | --- | --- | --- |
 | / | HomeView | 시작 페이지 | HomeMainInfo, HomeSubOneInfo,HomeSubTwoInfo,HomeSubThreeInfo |
 | /signup | SignupView | 회원 가입 페이지 | SignupForm |
 | /login | LoginView | 로그인 페이지 | LoginForm |
-| /movie | MovieView | 메인 페이지 | MovieRecommend,MovieLatest,MovieTopTen,MovieGenre,<span style="color:red">MovieCard,MovieCardDetailModal</span>|
+| /movie | MovieView | 메인 페이지 | MovieRecommend,MovieLatest,MovieTopTen,MovieGenre,MovieCard,MovieCardDetailModal |
 | /latest | LatestView | 최신 영화 페이지 | MovieCard,MovieCardDetailModal |
 | /popular | PopularView | 인기 영화 페이지 | MovieCard,MovieCardDetailModal |
 | /profile | ProfileView | 프로필 페이지 | ProfileMainInfo |
