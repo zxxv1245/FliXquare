@@ -31,8 +31,28 @@
   - figma
 
 ## 페이지 구성
+### Router and Component
 
-div v-show=”is_authenticated”로 제어할 것임.
+**※ 붉은 색 글자는 공통으로 사용되는 Component**
+
+| Path | Component | Desciption | Child-Component |
+| --- | --- | --- | --- |
+| / | HomeView | 시작 페이지 | HomeMainInfo, HomeSubOneInfo,HomeSubTwoInfo,HomeSubThreeInfo |
+| /signup | SignupView | 회원 가입 페이지 | SignupForm |
+| /login | LoginView | 로그인 페이지 | LoginForm |
+| /movie | MovieView | 메인 페이지 | MovieRecommend,MovieLatest,MovieTopTen,MovieGenre,MovieCard,MovieCardDetailModal |
+| /latest | LatestView | 최신 영화 페이지 | MovieCard,MovieCardDetailModal |
+| /popular | PopularView | 인기 영화 페이지 | MovieCard,MovieCardDetailModal |
+| /profile | ProfileView | 프로필 페이지 | ProfileMainInfo |
+| /profileupdate | ProfileUpdateView | 프로필 수정 페이지 | ProfileUpdateForm |
+| /genreupdate | GenreUpdateView | 장르 선택/수정 페이지 |  |
+| /store | StoreView | 내 찜 목록 페이지 | MovieCard,MovieCardDetailModal |
+| /articles | ArticlesView | 커뮤니티 메인 페이지 | ArticleCard |
+| /articlecreate | ArticleCreateView | 게시글 생성 페이지 | ArticleCreateForm |
+| /articledetail/:articleId | ArticleDetailView | 게시글 상세 정보 페이지 |  |
+| /articleupdate/:articleId | ArticleUpdateView | 게시글 수정 페이지 | ArticleUpdateForm |
+
+![](./erd/pic.jpg)
 
 ### ! 비로그인 페이지 (구성 완)
 
