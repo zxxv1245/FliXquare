@@ -36,26 +36,22 @@ const router = createRouter({
     {
       path : '/articles',
       name : 'ArticlesView',
-      component : ArticlesView,
-      children : [
-        {
-          path : 'articlecreate',
-          name : 'ArticleCreateView',
-          component : ArticleCreateView
-        },
-        {
-          path : 'articledetail',
-          name : 'ArticleDetailView',
-          component : ArticleDetailView,
-          children : [
-            {
-              path : 'articleupdate',
-              name : 'ArticleUpdateView',
-              component : ArticleUpdateView
-            }
-          ]
-        }
-      ]
+      component : ArticlesView, 
+    },
+    {
+      path : '/articlecreate',
+      name : 'ArticleCreateView',
+      component : ArticleCreateView
+    },
+    {
+      path : '/articledetail/:articleId',
+      name : 'ArticleDetailView',
+      component : ArticleDetailView,
+    },
+    {
+      path : '/articleupdate/:articleId',
+      name : 'ArticleUpdateView',
+      component : ArticleUpdateView
     },
     {
       path : '/latest',

@@ -142,7 +142,7 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
       .then(res => {
-        console.log('add')
+        // console.log('add')
       })
   }
   const removeGenre = function() {
@@ -154,9 +154,7 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
       .then(res => {
-        console.log('remove')
-        console.log('remove')
-
+        // console.log('remove')
       })
   }
   return {

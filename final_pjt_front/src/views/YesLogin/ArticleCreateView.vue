@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class = "container border border-white">
     <h1>ArticleCreateView</h1>
     <ArticleCreateForm/> 
   </div>
