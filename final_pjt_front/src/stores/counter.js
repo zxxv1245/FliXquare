@@ -155,6 +155,7 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then(res => {
         console.log('remove')
+        console.log('remove')
 
       })
   }
