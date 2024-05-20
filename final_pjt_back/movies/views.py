@@ -30,8 +30,7 @@ def genre_list(request) :
 
 @api_view(['GET'])
 def add_genre(request,user_pk) :
-    # print(request.GET['genre[0][id]'])
-    
+
     User = get_user_model()
     for i in range(3) :
         genre_id = request.GET[f'genre[{i}][id]']

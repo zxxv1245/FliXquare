@@ -28,6 +28,7 @@ def article_list(request):
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
+@permission_classes([IsAuthenticated])
 def article_detail(request, article_pk):
     # article = Article.objects.get(pk=article_pk)
     article = get_object_or_404(Article, pk=article_pk)
@@ -49,6 +50,7 @@ def article_detail(request, article_pk):
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def comment_list(request):
     # 전체 댓글 조회
     # comments = Comment.objects.all()
@@ -59,6 +61,7 @@ def comment_list(request):
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
+@permission_classes([IsAuthenticated])
 def comment_detail(request, comment_pk):
     # 단일 댓글 조회
     # comment = Comment.objects.get(pk=comment_pk)
