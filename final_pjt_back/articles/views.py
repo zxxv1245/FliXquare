@@ -11,8 +11,6 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from .serializers import ArticleListSerializer, ArticleSerializer,CommentSerializer
 from .models import Article, Comment
 
-
-
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def article_list(request):

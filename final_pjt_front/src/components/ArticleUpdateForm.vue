@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>ArticleUpdateForm</h2>
+    <h2>UpdateForm</h2>
   </div>
 </template>
 

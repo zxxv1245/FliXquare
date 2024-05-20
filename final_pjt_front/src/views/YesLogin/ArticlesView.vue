@@ -1,11 +1,11 @@
 <template>
   <div>
     <h1>ArticlesView</h1>
-    <span>
-      
-    </span>
-    <RouterLink :to = "{name : 'ArticleCreateView'}">ArticleCreate</RouterLink> | 
-    <RouterLink :to = "{name : 'ArticleDetailView'}">ArticleDetail</RouterLink> | 
+    
+    <RouterLink :to = "{name : 'ArticleCreateView'}">ArticleCreate</RouterLink>
+    <!-- <span> | </span> -->
+    <!-- <RouterLink :to = "{name : 'ArticleDetailView'}">ArticleDetail</RouterLink>
+    <span> | </span> -->
     
     <ArticleCard/>
     <RouterView/>
@@ -13,10 +13,13 @@
 </template>
 
 <script setup>
-  import { RouterLink,RouterView } from 'vue-router'
+  import { RouterLink, RouterView } from 'vue-router'
   import ArticleCard from '@/components/ArticleCard.vue';
 </script>
 
 <style scoped>
+div {
+  color: white
+}
 
 </style>

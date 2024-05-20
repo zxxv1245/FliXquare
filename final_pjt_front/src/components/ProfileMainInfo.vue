@@ -5,9 +5,9 @@
       <div>
         <h2>유저 이름</h2>
         <button class = "childbtn" @click = "goGenreUpdate">
-          <p class = "profileMainInfopTag">{{ counterStore.userGenre[0] }}</p>
-          <p class = "profileMainInfopTag">{{ counterStore.userGenre[1] }}</p>
-          <p class = "profileMainInfopTag">{{ counterStore.userGenre[2] }}</p>
+          <p class = "profileMainInfopTag">{{ counterStore.userGenre[0].name }}</p>
+          <p class = "profileMainInfopTag">{{ counterStore.userGenre[1].name }}</p>
+          <p class = "profileMainInfopTag">{{ counterStore.userGenre[2].name }}</p>
         </button>
         <button class = "childbtn" @click = "goStore">
           <p class = "profileMainInfopTag">내 찜 목록</p>

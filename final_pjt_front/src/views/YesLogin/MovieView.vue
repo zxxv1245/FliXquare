@@ -2,9 +2,12 @@
   <div>
     <h1>MovieView</h1>
     <div>
+      <!-- 이번 주 추천 영화 컴포넌트 -->
+    </div>
+    <div>
+      <MovieTopten/>
       <MovieRecommend/>
       <MovieLatest/>
-      <MovieTopten/>
       <MovieGenre/>
     </div>
   </div>
@@ -21,12 +24,11 @@ import { useMoviestore } from '@/stores/movies'
 
 const moviestore = useMoviestore()
 
-
 onMounted(() => {
   moviestore.fillMovies()
+  moviestore.fillLatest()
+  moviestore.getGenre()
 })
-
-
 
 
 </script>
