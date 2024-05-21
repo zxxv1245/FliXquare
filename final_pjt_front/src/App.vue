@@ -48,7 +48,6 @@ const logout = function() {
 
 onMounted(() => {
   moviestore.fillMovies();
-  moviestore.fillLatest();
 })
 
 </script>

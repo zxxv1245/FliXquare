@@ -44,7 +44,7 @@ export const useMoviestore = defineStore('movies', () => {
         }
         return 0
       })
-
+      fillLatest()
     })
   }
   // 외부 Counter 불러오기
@@ -65,7 +65,7 @@ export const useMoviestore = defineStore('movies', () => {
       movieNames.value.push(movie.title)
     })
   }
-  
+
   // 전체 장르 불러오기
   const getGenre = function() {
     axios({

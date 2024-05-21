@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="d-flex">
-      <button type="button" class="btn btn-outline-dark"><span></span></button>
+      <button type="button" class="btn btn-outline-dark"><span><</span></button>
       <MovieCard
       ref="movieCard"
       v-for="movie in latest"
