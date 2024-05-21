@@ -8,8 +8,8 @@ from rest_framework.permissions import IsAuthenticated
 
 from django.shortcuts import get_object_or_404, get_list_or_404
 
-from .serializers import ArticleListSerializer, ArticleSerializer,CommentSerializer
-from .models import Article, Comment
+from .serializers import ArticleListSerializer, ArticleSerializer,ArticleCreateSerializer,CommentCreateSerializer,CommentSerializer,CategorySerializer
+from .models import Article, Comment, Category
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
@@ -20,7 +20,7 @@ def article_list(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = ArticleSerializer(data=request.data)
+        serializer = ArticleCreateSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             # serializer.save()
             serializer.save(user=request.user)
@@ -89,8 +89,16 @@ def comment_create(request, article_pk):
     # article = Article.objects.get(pk=article_pk)
     article = get_object_or_404(Article, pk=article_pk)
     # 사용자 입력 데이터를 받아 직렬화 진행
-    serializer = CommentSerializer(data=request.data)
+    serializer = CommentCreateSerializer(data=request.data)
     # 유효성 검사
     if serializer.is_valid(raise_exception=True):
         serializer.save(article=article, user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def catagory_list(request) :
+    categorys = get_list_or_404(Category)
+    serializer = CategorySerializer(categorys, many=True)
+    return Response(serializer.data)

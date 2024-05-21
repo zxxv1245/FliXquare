@@ -22,6 +22,7 @@ export const useArticleStore = defineStore('article', () => {
     })
       .then(res => {
         articles.value = res.data
+        console.log(articles.value)
       })
       .catch(e => {
         console.log(e)
@@ -41,7 +42,6 @@ export const useArticleStore = defineStore('article', () => {
       .then(res => {
         // 조회 변수
         article.value = res.data
-
       })
       .catch(e => {
         console.log(e)
@@ -108,15 +108,32 @@ export const useArticleStore = defineStore('article', () => {
         // console.log(e)
       })
   }
+  
+  const category = ref(null)
+  const getCategory = function() {
+    axios({
+      method : 'get',
+      url : `${API_URL}/api/v2/category/`,
+      headers : {
+        Authorization : `Token ${counterStore.token}`
+      }
+    })
+      .then(res => {
+        category.value = res.data
+      })
+  }
+
 
   return{
     article,
     articles,
     API_URL,
+    category,
     getArticles,
     getArticleDetail,
     createArticle,
     deleteArticle,
-    updateArticle
+    updateArticle,
+    getCategory
   }
 }, { persist: true })

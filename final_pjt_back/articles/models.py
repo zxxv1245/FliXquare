@@ -14,8 +14,6 @@ class Article(models.Model):
     category = models.ForeignKey(
         Category, on_delete = models.CASCADE,
         related_name= 'category_article')
-    # 나중에 할래...
-    # likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='like_article')
     title = models.CharField(max_length=40)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -29,3 +27,5 @@ class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     content = models.TextField()
     
+# 나중에 할래...
+# likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='like_article')

@@ -9,8 +9,12 @@
         <label for="">분류</label>
         <select name="Categoty" v-model = "category">
           <option disabled value="">다음 중 하나를 선택하세요</option>
-          <option value="자유">자유</option>
-          <option value="영화">영화</option>
+          <option 
+            v-for = "cat in articleStore.category"
+            :key = "cat.id"
+            :value="cat.id">
+            {{ cat.name }}
+          </option>
         </select>
       </div>
       <div>

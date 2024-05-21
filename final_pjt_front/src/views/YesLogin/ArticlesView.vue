@@ -32,6 +32,7 @@
   
   onMounted(()=> {
     articleStore.getArticles()
+    articleStore.getCategory()
   })
 </script>
 
