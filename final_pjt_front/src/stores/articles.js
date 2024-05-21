@@ -22,7 +22,6 @@ export const useArticleStore = defineStore('article', () => {
     })
       .then(res => {
         articles.value = res.data
-        console.log(articles.value)
       })
       .catch(e => {
         console.log(e)
@@ -101,7 +100,7 @@ export const useArticleStore = defineStore('article', () => {
       }
     })
       .then(res => {
-        console.log('update성공')
+        // console.log('update성공')
         router.push({name : 'ArticleDetailView', params : {'articleId' : articleId}})
       })
       .catch(e => {
@@ -123,17 +122,77 @@ export const useArticleStore = defineStore('article', () => {
       })
   }
 
+  const allComments = ref([])
+
+  // 전체 댓글 조회
+  const getArticleComment = function() {
+    axios({
+      method :'get',
+      url : `${API_URL}/api/v2/comments/`,
+      headers : {
+          Authorization : `Token ${counterStore.token}`
+        }
+    })
+      .then(res => {
+        // console.log('성공')
+        allComments.value = res.data
+        
+      })
+      .catch(e => {
+        // console.log('실패')
+      })
+  }
+  // 댓글 생성
+  const createComment = function(content) {
+    axios({
+      method :'post',
+      url : `${API_URL}/api/v2/articles/${article.value.id}/comments/`,
+      headers : {
+          Authorization : `Token ${counterStore.token}`
+        },
+        data : {content}
+    })
+      .then(res => {
+        // console.log('성공')
+        getArticleComment()
+
+      })
+      .catch(e => {
+        console.log('실패')
+      })
+  }
+  
+  const deleteComment = function(commentId) {
+    axios({
+      method :'delete',
+      url : `${API_URL}/api/v2/comments/${commentId}/`,
+      headers : {
+          Authorization : `Token ${counterStore.token}`
+        },
+    })
+      .then(res => {
+        // console.log('성공')
+        getArticleComment()
+      })
+      .catch(e => {
+        console.log('실패')
+      })
+  }
 
   return{
     article,
     articles,
     API_URL,
     category,
+    allComments,
     getArticles,
     getArticleDetail,
     createArticle,
     deleteArticle,
     updateArticle,
-    getCategory
+    getCategory,
+    getArticleComment,
+    createComment,
+    deleteComment
   }
 }, { persist: true })

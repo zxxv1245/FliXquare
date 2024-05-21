@@ -27,6 +27,7 @@
               <p>Lorem ipsum dolor sit amet consectetur, adipisicing di, non tenetur aliquam animi sed iste, alias, sint assumenda? Id unde molestias sapiente dolores repudiandae?</p>
               <p>Mollitia amet ullam laborum officia minima commodi</p>
               <p>non tenetur aliquam animi sed iste, alias, sint assumenda? Id unde molestias sapiente dolores repudiandae?</p>
+              <MovieCardDetailModalCommentCreateForm/>
             </div>
           </div>
         </div>
@@ -36,6 +37,7 @@
 </template>
 
 <script setup>
+import MovieCardDetailModalCommentCreateForm from '@/components/ArticleDetailCommentCreateForm.vue'
 import { useMoviestore } from '@/stores/movies'
 import { onMounted } from 'vue'
 

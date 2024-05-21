@@ -7,10 +7,9 @@
     <p>내용 : {{ articleStore.article.content }}</p>
     <p>작성일자 : {{ articleStore.article.created_at.substring(0,10) }} {{ articleStore.article.created_at.substring(11,19) }}</p>
     
-    <RouterLink 
-      :to = "{name : 'ArticleUpdateView', params : {'articleId' : articleStore.article.id }}">ArticleUpdate</RouterLink>
+    <button @click = "updateArticle">수정</button> | 
     <button @click = "deleteArticle">삭제</button>
-    <RouterView/>
+    <hr>
     <ArticleDetailComment/>
     <ArticleDetailCommentCreateForm/>
   </div>
@@ -22,9 +21,10 @@ import ArticleDetailCommentCreateForm from '@/components/ArticleDetailCommentCre
 import { RouterLink,RouterView } from 'vue-router'
 import { ref,onMounted } from 'vue'
 import { useArticleStore } from '@/stores/articles';
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
 
 const route = useRoute()
+const router = useRouter()
 const articleStore = useArticleStore()
 
 onMounted(()=> {
@@ -34,6 +34,10 @@ onMounted(()=> {
 
 const deleteArticle = function() {
   articleStore.deleteArticle(route.params.articleId)
+}
+
+const updateArticle = function() {
+  router.push({name : 'ArticleUpdateView', params : {'articleId' : articleStore.article.id}})
 }
 </script>
 
