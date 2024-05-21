@@ -1,21 +1,11 @@
 <template>
   <div class="d-flex flex-column align-items-center">
-    <div v-if="!isLoading">
-      <!-- 로딩 중임을 표시하는 컴포넌트나 메시지 -->
-      <h1>로딩하고 있소</h1>
-      <p>Loading...</p>
-    </div>
-    <div v-else>
-      <!-- 이번 주 추천 영화 컴포넌트 -->
-      <!-- 주간 추천 영화를 위한 특정 컴포넌트나 내용을 여기에 추가할 수 있습니다 -->
-      <MovieTopten />
-      <MovieRecommend />
-      <h3>최신 영화 18선!!</h3>
-      <MovieLatest />
-      <!-- <div v-for="genre in counterStore.userGenre" :key="genre">
-        <MovieGenre :genre="genre" />
-      </div> -->
-    </div>
+    <!-- 이번 주 추천 영화 컴포넌트 -->
+    <MovieTopten />
+    <MovieRecommend />
+    <h3>최신 영화 18선!!</h3>
+    <MovieLatest />
+    <MovieGenre v-for="genre in counterStore.userGenre" :key="genre" :genre="genre" />
   </div>
 </template>
 

@@ -1,13 +1,22 @@
 <template>
   <div>
     <div class="d-flex">
-      <button type="button" class="btn btn-outline-dark"><span><</span></button>
+      <button
+      type="button"
+      class="btn btn-outline-dark"
+      @click="decrease"><span><</span>
+      </button>
+
       <MovieCard
-      ref="movieCard"
       v-for="movie in latest"
       :movie="movie"
       />
-      <button type="button" class="btn btn-outline-dark"><span>></span></button>
+
+      <button
+      type="button"
+      class="btn btn-outline-dark"
+      @click="increase"><span>></span>
+      </button>
     </div>
     <div class="d-flex justify-content-center pt-2" aria-label="LatestView Page navigation">
       <button
@@ -27,12 +36,8 @@
 <script setup>
 import MovieCard from '@/components/MovieCard.vue'
 import { useMoviestore } from '@/stores/movies'
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 const moviestore = useMoviestore()
-
-defineProps({
-  movies: Array
-})
 
 // 초기 출력
 const latest = ref(moviestore.latest.slice(0,4))
@@ -41,9 +46,6 @@ const length = ref(4)
 const pageNumber = ref(1)
 // 최대 페이지 값
 const numberPage = ref(Math.ceil(18/4))
-
-// 0:6
-// 3(0+3*1):9(6+3*1)
 
 const c = function (p) {
   pageNumber.value = p
@@ -71,19 +73,25 @@ const Resize = function () {
   }
 }
 
+const increase = function () {
+  if (pageNumber.value < numberPage.value) {
+    pageNumber.value += 1
+  }
+}
+
+const decrease = function () {
+  if (pageNumber.value > 1) {
+    pageNumber.value -= 1
+  }
+}
+
 watch(pageNumber, (nextPage) => {
   // pageNumber.value = nextPage
   latest.value = moviestore.latest.slice(length.value*(nextPage-1), length.value*nextPage)
 })
 
-
-
 // 우선, 즉각 반응형 아님 (디바이스 크기를 갑자기 줄이고 늘릴 일은 없기 때문에)
 onMounted(() => {
-  Resize()
-})
-
-onBeforeUnmount(() => {
   Resize()
 })
 

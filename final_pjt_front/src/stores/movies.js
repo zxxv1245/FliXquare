@@ -49,6 +49,7 @@ export const useMoviestore = defineStore('movies', () => {
   }
   // 외부 Counter 불러오기
   const counterStore = useCounterStore()
+  
   // userGenre 채우기
   const userGenre = ref([])
   const getUserGenre = function() {

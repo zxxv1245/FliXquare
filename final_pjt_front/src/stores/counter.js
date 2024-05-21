@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
+import { useMoviestore } from '@/stores/movies'
 import axios from 'axios'
 
 export const useCounterStore = defineStore('counter', () => {
@@ -11,6 +12,7 @@ export const useCounterStore = defineStore('counter', () => {
   const genres = ref([])
   const userId = ref(null)
   const userName = ref(null)
+  const movieStore = useMoviestore()
 
 
   const isSameGenre = function(genre1, genre2) {
@@ -95,6 +97,7 @@ export const useCounterStore = defineStore('counter', () => {
         console.log('로그인 성공!')
         token.value = response.data.key
         getUser()
+        movieStore.getGenre()
         if (userGenre.value.length === 0) {
           router.push({ name : 'GenreUpdateView' })
         } else {

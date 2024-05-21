@@ -3,7 +3,7 @@
     <div class="modal fade" :id="'DetailModal-'+movie.id" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-          <div class="modal-header border-bottom-0">
+          <div class="modal-header border-bottom-0" data-bs-theme="dark">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body bg-gray-700 d-flex row">

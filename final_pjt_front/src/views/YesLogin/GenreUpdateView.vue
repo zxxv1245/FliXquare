@@ -6,6 +6,7 @@
       <div class = "child">
         <draggable
           v-model = "counterStore.userGenre"
+          :itemKey="mygenre => mygenre.id"
           group = "genres"
           tag = "div"
           class="childchild"
@@ -16,6 +17,7 @@
         </draggable>
         <draggable
           v-model = "counterStore.genres"
+          :itemKey="genre => genre.id"
           group = "genres"
           tag = "div"
           class="childchild"

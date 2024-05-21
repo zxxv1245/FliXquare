@@ -1,25 +1,23 @@
 <template>
-  <div class = "profileMainInfoTopDiv">
-    <div>
-      <img src="@/assets/profileimg.jpg" alt="" class = "profileimgClass">
-      <div>
-        <h2>유저 이름</h2>
-        <button class = "childbtn" @click = "goGenreUpdate">
-          <p class = "profileMainInfopTag">{{ counterStore.userGenre[0].name }}</p>
-          <p class = "profileMainInfopTag">{{ counterStore.userGenre[1].name }}</p>
-          <p class = "profileMainInfopTag">{{ counterStore.userGenre[2].name }}</p>
-        </button>
-        <button class = "childbtn" @click = "goStore">
-          <p class = "profileMainInfopTag">내 찜 목록</p>
-        </button>
-      </div>
+  <div class = "profileMainInfoTopDiv d-flex flex-column align-items-center">
+    <img src="@/assets/profileimg.jpg" alt="" class = "profileimgClass my-3">
+    <h2>{{ counterStore.userName }}</h2>
+    <div class="my-3">
+      <button class = "childbtn" @click = "goGenreUpdate">
+        <p class = "profileMainInfopTag">{{ counterStore.userGenre[0].name }}</p>
+        <p class = "profileMainInfopTag">{{ counterStore.userGenre[1].name }}</p>
+        <p class = "profileMainInfopTag">{{ counterStore.userGenre[2].name }}</p>
+      </button>
+      <button class = "childbtn" @click = "goStore">
+        <p class = "profileMainInfopTag">내 찜 목록</p>
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
-import { useCounterStore } from '@/stores/counter';
+import { useRouter } from 'vue-router'
+import { useCounterStore } from '@/stores/counter'
 const counterStore = useCounterStore()
 const router = useRouter()
 
@@ -36,7 +34,6 @@ const goStore = function() {
 .profileimgClass {
   width: 300px;
   border-radius: 50%;
-  
 }
 
 .profileMainInfoTopDiv {
