@@ -4,10 +4,16 @@ from django.conf import settings
 class Category(models.Model) :
     name = models.CharField(max_length=16)
 
+    def __str__(self) :
+        return self.name
+
 class Article(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-    related_name='user_article')
+        related_name= 'user_article')
+    category = models.ForeignKey(
+        Category, on_delete = models.CASCADE,
+        related_name= 'category_article')
     # 나중에 할래...
     # likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='like_article')
     title = models.CharField(max_length=40)

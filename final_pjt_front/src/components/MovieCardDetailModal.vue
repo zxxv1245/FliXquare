@@ -20,6 +20,7 @@
               <p>{{movie.overview}}</p>
               <h4>장르</h4>
               <!-- <p>{{movie.genre_ids}}</p> -->
+              <span v-for="id in movieStore.fillDetailGenre(movie.genre_ids)">{{ id }}</span>
             </div>
             <div class="col-5">
               <h3 class="text-center">영화 댓글</h3>
@@ -36,34 +37,33 @@
 
 <script setup>
 import { useMoviestore } from '@/stores/movies'
-import { useRouter } from 'vue-router'
 import { onMounted } from 'vue'
 
 
 const movieStore = useMoviestore()
-const router = useRouter()
 const genreList = movieStore.genres
 
 defineProps({
   movie: Object
 })
 
-console.log()
 
 
 // const genres = movieStore.fillDetailGenre()
-
-
-
-
-
 
 </script>
 
 <style scoped>
 div {
-  color: black;
+  color: white;
 }
 
+.modal-content {
+  background-color: rgb(0, 0, 0, 0.85);
+}
+
+span {
+  padding-right: 24px;
+}
 
 </style>

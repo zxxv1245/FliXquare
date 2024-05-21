@@ -28,6 +28,7 @@ export const useArticleStore = defineStore('article', () => {
       })
   }
 
+
   // 단일 게시글 조회
   const getArticleDetail = function(articleId) {
     axios({
@@ -38,7 +39,9 @@ export const useArticleStore = defineStore('article', () => {
       }
     })
       .then(res => {
+        // 조회 변수
         article.value = res.data
+
       })
       .catch(e => {
         console.log(e)
@@ -47,14 +50,14 @@ export const useArticleStore = defineStore('article', () => {
 
   // 게시글 생성 
   const createArticle = function(payload) {
-    const {title,content} = payload
+    const {title,content,category} = payload
     axios({
       method : 'post',
       url : `${API_URL}/api/v2/articles/`,
       headers : {
         Authorization : `Token ${counterStore.token}`
       },
-      data : {title,content}
+      data : {title,content,category}
     })
       .then(res =>{
         router.push({name : 'ArticlesView'})
@@ -83,20 +86,23 @@ export const useArticleStore = defineStore('article', () => {
       })
   }
 
-  const updateTitle = ref(null)
-  const updateContent = ref(null)
-  const updateArticle = function(articleId) {
+  
+  const updateArticle = function(articleId,article) {
     axios({
       method : 'put',
       url : `${API_URL}/api/v2/articles/${articleId}/`,
       headers : {
         Authorization : `Token ${counterStore.token}`
+      },
+      data : {
+        title : article.title,
+        content : article.content,
+        
       }
     })
       .then(res => {
-        // console.log('delete성공')
-        updateTitle.value = res.data.title
-        updateContent.value = res.data.content
+        console.log('update성공')
+        router.push({name : 'ArticleDetailView', params : {'articleId' : articleId}})
       })
       .catch(e => {
         // console.log(e)
@@ -107,8 +113,6 @@ export const useArticleStore = defineStore('article', () => {
     article,
     articles,
     API_URL,
-    updateTitle,
-    updateContent,
     getArticles,
     getArticleDetail,
     createArticle,

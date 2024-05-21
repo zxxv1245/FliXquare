@@ -2,7 +2,6 @@
   <div class="container">
     <div
     class="row row-cols-lg-4 row-cols-md-3 row-cols-2 g-3">
-    <!-- v-for 부분을 수정해야한다. -->
       <MovieCard
       class="col"
       v-for="movie in pageMovieList"
