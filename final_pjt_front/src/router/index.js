@@ -14,7 +14,7 @@ import ArticleCreateView from '@/views/YesLogin/ArticleCreateView.vue'
 import ArticleDetailView from '@/views/YesLogin/ArticleDetailView.vue'
 import ArticleUpdateView from '@/views/YesLogin/ArticleUpdateView.vue'
 
-import { useMoviestore } from '@/stores/movies'
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [

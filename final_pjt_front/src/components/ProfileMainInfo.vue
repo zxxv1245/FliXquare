@@ -45,6 +45,8 @@ const goStore = function() {
   border: 0px;
   width: 300px;
   height: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .profileMainInfopTag {

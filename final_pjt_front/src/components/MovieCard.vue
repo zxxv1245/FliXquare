@@ -1,7 +1,7 @@
 <template>
   <div class="d-block">
     <div>
-      <button type="button" data-bs-toggle="modal" :data-bs-target="'#DetailModal-'+movie.id" class="btn p-0">
+      <button type="button" data-bs-toggle="modal" :data-bs-target="'#DetailModal-'+movie.id" class="btn p-0" @click = "getMovieComment">
         <img :src="imgURL(movie.poster_path)" alt="{{movie.title}}_poster_path_img">
       </button>
     </div>
@@ -15,10 +15,17 @@
 
 <script setup>
 import MovieCardDetailModal from '@/components/MovieCardDetailModal.vue';
+import { useMoviestore } from '@/stores/movies'
 
 defineProps({
   movie: Object
 })
+
+const movieStore = useMoviestore()
+
+const getMovieComment = function() {
+  movieStore.getMovieComment()
+}
 
 const imgURL = (path, size = 300) => {
   return `https://image.tmdb.org/t/p/w${size}${path}`

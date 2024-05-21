@@ -24,10 +24,14 @@
             </div>
             <div class="col-5">
               <h3 class="text-center">영화 댓글</h3>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing di, non tenetur aliquam animi sed iste, alias, sint assumenda? Id unde molestias sapiente dolores repudiandae?</p>
-              <p>Mollitia amet ullam laborum officia minima commodi</p>
-              <p>non tenetur aliquam animi sed iste, alias, sint assumenda? Id unde molestias sapiente dolores repudiandae?</p>
-              <MovieCardDetailModalCommentCreateForm/>
+              <div 
+                v-for = "comment in comments"
+                :key = "comment.id">
+                <b>{{ comment.user.username }}</b> | <p class = "pTag">{{ comment.content }}</p>
+                <button @click = "deleteComment(comment.id)">삭제</button>
+              </div>
+              <MovieCardDetailModalCommentCreateForm
+                :movie = "movie"/>
             </div>
           </div>
         </div>
@@ -37,17 +41,31 @@
 </template>
 
 <script setup>
-import MovieCardDetailModalCommentCreateForm from '@/components/ArticleDetailCommentCreateForm.vue'
+import MovieCardDetailModalCommentCreateForm from '@/components/MovieCardDetailModalCommentCreateFom.vue'
 import { useMoviestore } from '@/stores/movies'
-import { onMounted } from 'vue'
+import { onMounted,computed } from 'vue'
 
 
 const movieStore = useMoviestore()
 const genreList = movieStore.genres
 
-defineProps({
+const props = defineProps({
   movie: Object
 })
+
+const comments = computed(() => {
+  return movieStore.allMovieComments.filter((comment) => props.movie.id === comment.movie)
+})
+
+const deleteComment = function(commentId) {
+  movieStore.deleteComment(commentId)
+}
+
+onMounted(() => {
+  movieStore.getMovieComment()
+})
+
+
 
 
 
@@ -68,4 +86,7 @@ span {
   padding-right: 24px;
 }
 
+.pTag {
+  display: inline;
+}
 </style>

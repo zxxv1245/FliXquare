@@ -27,25 +27,29 @@ export const useMoviestore = defineStore('movies', () => {
   }
 
   // 전체 영화 채우기 axios
+  
   const fillMovies = function () {
-    axios({
-      method: 'GET',
-      url: `${API_URL}/api/v1/movies/`
-    })
-    .then((response) => {
-      movies.value = response.data
-      // popularity 기준으로 정렬함
-      movies.value.sort(function (a, b) {
-        if (a.popularity > b.popularity) {
-          return -1
-        }
-        if (a.popularity < b.popularity) {
-          return 1
-        }
-        return 0
+    if (movies.value.length === 0) {
+      axios({
+        method: 'GET',
+        url: `${API_URL}/api/v1/movies/`
       })
-      fillLatest()
-    })
+      .then((response) => {
+        movies.value = response.data
+        // popularity 기준으로 정렬함
+        movies.value.sort(function (a, b) {
+          if (a.popularity > b.popularity) {
+            return -1
+          }
+          if (a.popularity < b.popularity) {
+            return 1
+          }
+          return 0
+        })
+        fillLatest()
+      })
+
+    }
   }
   // 외부 Counter 불러오기
   const counterStore = useCounterStore()
@@ -125,17 +129,80 @@ export const useMoviestore = defineStore('movies', () => {
     
   }
 
+  const allMovieComments = ref([])
+
+  // 전체 댓글 조회
+  const getMovieComment = function() {
+    axios({
+      method :'get',
+      url : `${API_URL}/api/v1/comments/`,
+      headers : {
+          Authorization : `Token ${counterStore.token}`
+        }
+    })
+      .then(res => {
+        // console.log('성공')
+        allMovieComments.value = res.data
+        
+      })
+      .catch(e => {
+        // console.log('실패')
+      })
+  }
+  // 댓글 생성
+  const createMovieComment = function(payload) {
+    const {movieId,content} = payload
+    axios({
+      method :'post',
+      url : `${API_URL}/api/v1/movies/${movieId}/comments/`,
+      headers : {
+          Authorization : `Token ${counterStore.token}`
+        },
+        data : {content}
+    })
+      .then(res => {
+        // console.log('moviecommentcreate성공')
+        getMovieComment()
+
+      })
+      .catch(e => {
+        console.log('실패')
+      })
+  }
+
+  const deleteComment = function(commentId) {
+    axios({
+      method :'delete',
+      url : `${API_URL}/api/v1/comments/${commentId}/`,
+      headers : {
+          Authorization : `Token ${counterStore.token}`
+        },
+    })
+      .then(res => {
+        // console.log('성공')
+        getMovieComment()
+      })
+      .catch(e => {
+        console.log('실패')
+      })
+  }
+
   return {
     movies,
     latest,
     genres,
     messages,
+    allMovieComments,
+    counterStore,
     fillMovies,
     fillLatest,
     getGenre,
     fillDetailGenre,
     getUserGenre,
     getMovieTitle,
-    ChatGpt
+    ChatGpt,
+    getMovieComment,
+    createMovieComment,
+    deleteComment
   }
 }, { persist: true })

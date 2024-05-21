@@ -9,7 +9,6 @@ export const useArticleStore = defineStore('article', () => {
   const router = useRouter()
   const counterStore = useCounterStore()
   const articles = ref([])
-  const article = ref({})
   
   // 전체 게시글 조회
   const getArticles = function() {
@@ -20,15 +19,16 @@ export const useArticleStore = defineStore('article', () => {
         Authorization : `Token ${counterStore.token}`
       }
     })
-      .then(res => {
-        articles.value = res.data
-      })
-      .catch(e => {
-        console.log(e)
-      })
+    .then(res => {
+      articles.value = res.data
+    })
+    .catch(e => {
+      console.log(e)
+    })
   }
-
-
+  
+  
+  const article = ref(null)
   // 단일 게시글 조회
   const getArticleDetail = function(articleId) {
     axios({
@@ -162,6 +162,7 @@ export const useArticleStore = defineStore('article', () => {
       })
   }
   
+  // 댓글 삭제
   const deleteComment = function(commentId) {
     axios({
       method :'delete',
