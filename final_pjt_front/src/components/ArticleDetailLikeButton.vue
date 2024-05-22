@@ -1,8 +1,7 @@
 <template>
   <button @click="likeArticle(articleId)">
     <span v-if = "isArticleLike === false">🤍 좋아요</span>
-    <span class = "red" v-else-if = "isArticleLike === true">❤ 좋아요 취소(좋아요를 한 상태)</span>
-    <span v-else>null</span>
+    <span v-else-if = "isArticleLike === true">❤ 좋아요 취소</span>
   </button>
 </template>
 
@@ -21,7 +20,7 @@ const articleStore = useArticleStore()
 const counterStore = useCounterStore()
 
 // 게시글 좋아요
-const isArticleLike = ref(null)
+const isArticleLike = ref(false)
 
 
 
@@ -37,33 +36,22 @@ const likeArticle = function(articleId) {
     .then(res => {
       // console.log(res.data.is_liked)
       isArticleLike.value = res.data.is_liked
+      articleStore.getArticleDetail(articleId)
     })
     .catch(e => {
       console.log('실패')
     })
 }
 
-watch(props.article.likes_user,(newvalue) => {
-  if (newvalue.includes(counterStore.userId)) {
-    isArticleLike.value = true 
-    // console.log(isArticleLike.value)
+onMounted(() => {
+  if (props.article.likes_user.includes(counterStore.userId)) {
+    isArticleLike.value = true;
   } else {
-    isArticleLike.value = false
+    isArticleLike.value = false;
   }
-})
+});
 
 
-
-// const comments = computed(() => {
-//   return articleStore.allComments.filter((comment) => articleStore.article.id === comment.article)
-// })
-
-// onMounted(() => {
-//   articleStore.getArticleComment()
-// })
-
-
-//
 </script>
 
 <style scoped>

@@ -20,26 +20,22 @@ const counterStore = useCounterStore()
 
 // 게시글 좋아요
 const isMovieStore = ref(null)
-// console.log(`props:${props.movieId}`, isMovieStore.value)
-
-// 클릭 시, 찜 혹은 찜 해제
-const storeMovie = function(movieId) {
-  axios({
-    method :'get',
-    url : `${counterStore.API_URL}/api/v1/movie/${movieId}/store/`,
-    headers : {
-        Authorization : `Token ${counterStore.token}`
-      },
-  })
-    .then(res => {
-      // Modal Components value
-      isMovieStore.value = res.data.is_liked
-
+  const storeMovie = function(movieId) {
+    axios({
+      method :'get',
+      url : `${counterStore.API_URL}/api/v1/movie/${movieId}/store/`,
+      headers : {
+          Authorization : `Token ${counterStore.token}`
+        },
     })
-    .catch(e => {
-      console.log('실패')
-    })
-}
+      .then(res => {
+        // console.log('성공')
+        isMovieStore.value = res.data.is_liked
+      })
+      .catch(e => {
+        console.log('실패')
+      })
+  }
 
 onMounted(() => {
   const movie = movieStore.movies.find((movie) => movie.id === props.movieId)

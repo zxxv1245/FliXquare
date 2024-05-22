@@ -2,12 +2,14 @@
   <div 
     v-for = "comment in comments"
     :key = "comment.id">
-    {{ comment }}
+    <!-- {{ comment }} -->
     <b>{{ comment.user.username }}</b> | <p class = "pTag">{{ comment.content }}</p>
     <button @click = "deleteComment(comment.id)">삭제</button>
     <ArticleDetailCommentLikeButton
       :key = "comment.id"
-      :comment-id = "comment.id"/>
+      :comment-id = "comment.id"
+      :comment = "comment"/>
+    {{ comment.likes_user.length }}명이 좋아함
   </div>
 </template>
 
@@ -44,8 +46,5 @@ onMounted(() => {
 <style scoped>
 .pTag {
   display: inline;
-}
-.red {
-  color: red;
 }
 </style>
