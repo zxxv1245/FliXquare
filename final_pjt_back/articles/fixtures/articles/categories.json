@@ -1,0 +1,16 @@
+[
+  {
+    "model": "articles.Category",
+    "pk": 1,
+    "fields" : {
+      "name": "자유"
+    }
+  },
+  {
+    "model": "articles.Category",
+    "pk": 2,
+    "fields" : {
+        "name": "영화"
+      }
+  }
+]

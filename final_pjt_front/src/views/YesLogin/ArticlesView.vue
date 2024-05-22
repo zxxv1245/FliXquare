@@ -26,7 +26,7 @@
   import ArticleCard from '@/components/ArticleCard.vue';
   import { RouterLink, RouterView } from 'vue-router'
   import { useArticleStore } from '@/stores/articles'
-  import { ref,onMounted } from 'vue'
+  import { ref, onMounted } from 'vue'
 
   const articleStore = useArticleStore()
   

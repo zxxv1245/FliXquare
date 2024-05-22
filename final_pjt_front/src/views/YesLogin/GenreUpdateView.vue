@@ -36,11 +36,12 @@
 import { ref,onMounted } from 'vue'
 import { useRoute,useRouter } from 'vue-router';
 import { useCounterStore } from '@/stores/counter'
+import { useMoviestore } from '@/stores/movies'
 import draggable from 'vuedraggable'
 
 const counterStore = useCounterStore()
+const movieStore = useMoviestore()
 const router = useRouter()
-const route = useRoute()
 
 onMounted(() => {
   counterStore.getGenre()
@@ -50,7 +51,10 @@ const goMovie = function() {
   counterStore.removeGenre()
   setTimeout(() => {
     counterStore.addGenre()
-  },100)
+    movieStore.getGenre()
+    movieStore.getUserGenre()
+    // movieStore.ChatGpt(movieStore.apiMessages)
+  },1000)
   router.push({name : "MovieView"})
 }
 

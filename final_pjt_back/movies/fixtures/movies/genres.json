@@ -106,13 +106,6 @@
   },
   {
     "model": "movies.Genre",
-    "pk": 10770,
-    "fields" : {
-      "name": "TV 영화"
-    }
-  },
-  {
-    "model": "movies.Genre",
     "pk": 53,
     "fields" : {
       "name": "스릴러"

@@ -4,12 +4,10 @@
     <!-- user가 쓴 글 보기 -->
     <!-- user가 작성한 영화 댓글 -->
   </div>
-  <RouterView/>
 </template>
 
 <script setup>
-  import { RouterLink, RouterView } from 'vue-router'
-  import ProfileMainInfo from '@/components/ProfileMainInfo.vue';
+import ProfileMainInfo from '@/components/ProfileMainInfo.vue'
 </script>
 
 <style scoped>

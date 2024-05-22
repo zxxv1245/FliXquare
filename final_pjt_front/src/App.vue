@@ -29,7 +29,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import { useRoute, useRouter } from 'vue-router';
 import { useCounterStore } from './stores/counter';
 
-const moviestore = useMoviestore()
+const movieStore = useMoviestore()
 const store = useCounterStore()
 const router = useRouter()
 const route = useRoute()
@@ -47,7 +47,8 @@ const logout = function() {
 }
 
 onMounted(() => {
-  moviestore.fillMovies();
+  movieStore.fillMovies();
+  movieStore.getMovieTitle();
 })
 
 </script>
@@ -99,4 +100,6 @@ nav a {
   margin-right: 10px;
   border: 0px;
 }
+
+
 </style>

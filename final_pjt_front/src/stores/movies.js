@@ -2,12 +2,15 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useRouter } from 'vue-router'
 import { useCounterStore } from '@/stores/counter'
+import OpenAI from 'openai'
 import axios from 'axios'
 
 export const useMoviestore = defineStore('movies', () => {
   const API_URL = 'http://127.0.0.1:8000'
   const OPEN_API_URL = 'https://api.openai.com/v1/chat/completions'
-  const API_KEY = '***REMOVED***'
+  // const API_KEY = '***REMOVED***'
+  // const API_KEY = ''
+  // const API_KEY = '***REMOVED***'
 
   // 전체 영화 목록
   const movies = ref([])
@@ -17,17 +20,12 @@ export const useMoviestore = defineStore('movies', () => {
   // 장르 목록
   const genres = ref([])
 
-  // page_number = 현재 페이지; number_page = 각 카테고리의 최대 페이지 수
-  // const pageNumber = ref(1)
-  const numberPage = ref(null)
-
   // 전체 최신 영화 채우기
   const fillLatest = function () {
     latest.value = movies.value.filter((movie) => movie.is_latest)
   }
 
   // 전체 영화 채우기 axios
-  
   const fillMovies = function () {
     if (movies.value.length === 0) {
       axios({
@@ -65,7 +63,7 @@ export const useMoviestore = defineStore('movies', () => {
   const movieNames = ref([])
   const getMovieTitle = function() {
     movieNames.value = []
-    const temp = ref(movies.value.filter((movie) => movie.id <= 100))
+    const temp = ref(movies.value.filter((movie) => movie.id <= 40))
     temp.value.forEach((movie) => {
       movieNames.value.push(movie.title)
     })
@@ -81,10 +79,6 @@ export const useMoviestore = defineStore('movies', () => {
         genres.value = res.data
       })
     }
-    // API 요청할 message 채우기
-    const messages = computed(() => {
-      return `나는 [${userGenre.value}] 장르를 좋아해. 내가 가지고 있는 영화 목록은 [${movieNames.value}]가 있어. 이 중에 영화 제목만 5개 ['영화 제목1', '영화 제목2', ...]의 형태로 출력해줘. 군더더기 말 없애고 그냥 리스트만 출력해줘.`    
-    })
     
   // Detail에서 영화 불러오고, 장르 불러오기
   const fillDetailGenre = function(ids) {
@@ -96,37 +90,57 @@ export const useMoviestore = defineStore('movies', () => {
       return movieGenreName.value
     }
   
+  // API 요청할 message 채우기
+  const apiMessages = computed(() => {
+    return `나는 [${userGenre.value}] 장르를 좋아해. 내가 가지고 있는 영화 목록은 [${movieNames.value}]가 있어. 이 중에 영화 제목 3개만 출력해줘.`    
+    })
+
+  // 추천 영화 목록
+  const recommend = ref([])
+
   // chatGPT API
-  const ChatGpt = function() {
+  const ChatGpt = function(message) {
       axios({
         method: 'post', 
-        url: OPEN_API_URL, 
+        url: OPEN_API_URL,
         headers : {
-          Authorization: `Bearer ${API_KEY}`, // 인증 키 설정
+          'Authorization': `Bearer ${API_KEY}`, // 인증 키 설정
           'Content-Type': 'application/json' // 요청 데이터의 타입
         },
         data: { 
-          model: 'gpt-4.0', 
-          messages 
+          'model': 'gpt-3.5-turbo', 
+          'messages': [
+            {
+              'role': 'user',
+              'content': `${message}`
+            }
+          ] 
         }
       })
         .then(res => {
         // 응답 데이터 확인 (크롬 개발자 도구 콘솔창)
-          console.log(res.data)
-
+          // 0. 요청 보내기 전 보낼 메세지를 확인한다.
+          console.log(apiMessages)
           // 1. 응답 데이터에서 응답 메세지를 가져온다.
+          const message = ref(res.data.choices[0].message.content)
+          console.log(message.value)
 
-          // 2. 채팅창에 메세지를 등록한다.
-          // addChat("receive", 응답받은메세지)
-
-          // 3. 채팅의 연속성을 위해 이전 메세지를 oldMsg 변수에 저장
-          // messages 에서 system 메세지의 content 값으로 설정됨
+          // 2. 문자열을 배열로 변환 (GPT response 가공)
+          message.value = message.value.split('\n').map(line => line.replace(/^\d+\. /, '').trim())
+          console.log('가공 데이터 :', message.value)
+          
+          // 3. 교집합 찾기
+          message.value.filter(word => movieNames.value.includes(word)).forEach((movieName) => {
+            recommend.value.push(movies.find((movie) => movie.title === movieName))
+          })
+          // modal object, recoomend : [(str:name), genre_ids (없음)]
+          console.log(recommend.value)
         })
         
         .catch(err => {
-          console.log(err) 
+          recommend.value = movies.value.slice(0,18)
+          console.log(err)
         })
-    
   }
 
   const allMovieComments = ref([])
@@ -149,7 +163,8 @@ export const useMoviestore = defineStore('movies', () => {
         // console.log('실패')
       })
   }
-  // 댓글 생성
+
+  // 영화 댓글 생성
   const createMovieComment = function(payload) {
     const {movieId,content} = payload
     axios({
@@ -170,6 +185,7 @@ export const useMoviestore = defineStore('movies', () => {
       })
   }
 
+  // 영화 댓글 삭제
   const deleteComment = function(commentId) {
     axios({
       method :'delete',
@@ -191,9 +207,9 @@ export const useMoviestore = defineStore('movies', () => {
     movies,
     latest,
     genres,
-    messages,
+    apiMessages,
+    recommend,
     allMovieComments,
-    counterStore,
     fillMovies,
     fillLatest,
     getGenre,

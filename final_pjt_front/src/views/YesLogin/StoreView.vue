@@ -9,9 +9,18 @@
 <script setup>
 import MovieCard from '@/components/MovieCard.vue'
 import { useMoviestore } from '@/stores/movies'
+import { useCounterStore } from '@/stores/counter'
+import { ref, onMounted, computed } from 'vue'
+
 
 const movieStore = useMoviestore()
+const store = useCounterStore()
 const movies = movieStore.movies
+
+onMounted(() => {
+
+})
+
 
 
 </script>

@@ -44,10 +44,10 @@
 | /profile | ProfileView | 프로필 페이지 | ProfileMainInfo |
 | /profileupdate | ProfileUpdateView | 프로필 수정 페이지 | ProfileUpdateForm |
 | /genreupdate | GenreUpdateView | 장르 선택/수정 페이지 |  |
-| /store | StoreView | 내 찜 목록 페이지 | MovieCard,MovieCardDetailModal |
+| /store | StoreView | 내 찜 목록 페이지 | MovieCard,MovieCardDetailModal,MovieCardDetailModalLikeButton,MovieCardDetailModalCommentLikeButton,MovieCardDetailModalStoreButton |
 | /articles | ArticlesView | 커뮤니티 메인 페이지 | ArticleCard |
 | /articlecreate | ArticleCreateView | 게시글 생성 페이지 | ArticleCreateForm |
-| /articledetail/:articleId | ArticleDetailView | 게시글 상세 정보 페이지 |  |
+| /articledetail/:articleId | ArticleDetailView | 게시글 상세 정보 페이지 | ArticleDetailComment,ArticleDetailCommentCreateForm,ArticleDetailLikeButton,ArticleDetailCommentLikeButton |
 | /articleupdate/:articleId | ArticleUpdateView | 게시글 수정 페이지 | ArticleUpdateForm |
 
 ![](./erd/pic.jpg)

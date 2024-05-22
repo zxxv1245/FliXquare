@@ -8,7 +8,6 @@ import MovieView from '@/views/YesLogin/MovieView.vue'
 import PopularView from '@/views/YesLogin/PopularView.vue'
 import ProfileView from '@/views/YesLogin/ProfileView.vue'
 import StoreView from '@/views/YesLogin/StoreView.vue'
-import ProfileUpdateView from '@/views/YesLogin/ProfileUpdateView.vue'
 import GenreUpdateView from '@/views/YesLogin/GenreUpdateView.vue'
 import ArticleCreateView from '@/views/YesLogin/ArticleCreateView.vue'
 import ArticleDetailView from '@/views/YesLogin/ArticleDetailView.vue'
@@ -73,11 +72,6 @@ const router = createRouter({
       name : 'ProfileView',
       component : ProfileView,
       
-    },
-    {
-      path : '/profileupdate',
-      name : 'ProfileUpdateView',
-      component : ProfileUpdateView
     },
     {
       path : '/store',

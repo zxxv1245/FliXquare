@@ -11,11 +11,12 @@
               <!-- <iframe width="430px" height="300px" src="https://www.youtube.com/embed/4Y05XXdOwbo" frameborder="0"></iframe> -->
               <div class="d-flex justify-content-between">
                 <h2>{{movie.title}}</h2>
-                <button class="btn">
-                  <div class="pe-3 h3 text-danger text-center">
-                    ♥
-                  </div>
-                </button>
+                <MovieCardDetailModalStoreButton
+                  :key = "movie.id"
+                  :movie-id = "movie.id"/>
+                <MovieCardDetailModalLikeButton
+                  :key = "movie.id"
+                  :movie-id = "movie.id"/>
               </div>
               <p>{{movie.overview}}</p>
               <h4>장르</h4>
@@ -28,6 +29,9 @@
                 v-for = "comment in comments"
                 :key = "comment.id">
                 <b>{{ comment.user.username }}</b> | <p class = "pTag">{{ comment.content }}</p>
+                <MovieCardDetailModalCommentLikeButton
+                  :key = "comment.id"
+                  :comment-id = "comment.id"/>
                 <button @click = "deleteComment(comment.id)">삭제</button>
               </div>
               <MovieCardDetailModalCommentCreateForm
@@ -41,6 +45,9 @@
 </template>
 
 <script setup>
+import MovieCardDetailModalCommentLikeButton from './MovieCardDetailModalCommentLikeButton.vue'
+import MovieCardDetailModalStoreButton from './MovieCardDetailModalStoreButton.vue'
+import MovieCardDetailModalLikeButton from '@/components/MovieCardDetailModalLikeButton.vue'
 import MovieCardDetailModalCommentCreateForm from '@/components/MovieCardDetailModalCommentCreateFom.vue'
 import { useMoviestore } from '@/stores/movies'
 import { onMounted,computed } from 'vue'

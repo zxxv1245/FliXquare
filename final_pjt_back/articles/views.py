@@ -102,3 +102,37 @@ def catagory_list(request) :
     categorys = get_list_or_404(Category)
     serializer = CategorySerializer(categorys, many=True)
     return Response(serializer.data)
+
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def likes_article(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    if request.user in article.likes_user.all():
+        article.likes_user.remove(request.user)
+        is_liked = False
+    else:
+        article.likes_user.add(request.user)
+        is_liked = True
+    context = {
+        'is_liked': is_liked,
+    }
+    return Response(context)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def likes_comment(request, comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    if request.user in comment.likes_user.all():
+        comment.likes_user.remove(request.user)
+        is_liked = False
+    else:
+        comment.likes_user.add(request.user)
+        is_liked = True
+    context = {
+        'is_liked': is_liked,
+    }
+    return Response(context)

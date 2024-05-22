@@ -108,3 +108,49 @@ def comment_create(request, movie_pk):
         serializer.save(movie=movie, user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def likes_movie(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    if request.user in movie.likes_user.all():
+        movie.likes_user.remove(request.user)
+        is_liked = False
+    else:
+        movie.likes_user.add(request.user)
+        is_liked = True
+    context = {
+        'is_liked': is_liked,
+    }
+    return Response(context)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def store_user(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    if request.user in movie.store_user.all():
+        movie.store_user.remove(request.user)
+        is_liked = False
+    else:
+        movie.store_user.add(request.user)
+        is_liked = True
+    context = {
+        'is_liked': is_liked,
+    }
+    return Response(context)
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def likes_comment(request, comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    if request.user in comment.likes_user.all():
+        comment.likes_user.remove(request.user)
+        is_liked = False
+    else:
+        comment.likes_user.add(request.user)
+        is_liked = True
+    context = {
+        'is_liked': is_liked,
+    }
+    return Response(context)

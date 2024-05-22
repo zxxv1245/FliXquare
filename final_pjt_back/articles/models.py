@@ -18,6 +18,7 @@ class Article(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='like_article', blank=True)
 
 
 class Comment(models.Model):
@@ -26,6 +27,4 @@ class Comment(models.Model):
     related_name='user_article_comment')
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     content = models.TextField()
-    
-# 나중에 할래...
-# likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='like_article')
+    likes_user = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='like_article_comment', blank=True)
