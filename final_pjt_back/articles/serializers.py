@@ -48,18 +48,12 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    # class ArticleTitleSerializer(serializers.ModelSerializer):
-    #     class Meta:
-    #         model = Article
-    #         fields = ('id',)
-
     class UserDataSerializer(serializers.ModelSerializer) :
         class Meta :
             model = get_user_model()
             fields = '__all__'
             
     user = UserDataSerializer(read_only = True)  
-    # article = ArticleTitleSerializer(read_only=True)
     
     class Meta:
         model = Comment

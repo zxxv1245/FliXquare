@@ -2,25 +2,34 @@
   <div 
     v-for = "comment in comments"
     :key = "comment.id">
-    <!-- {{ comment }} -->
-    <b>{{ comment.user.username }}</b> | <p class = "pTag">{{ comment.content }}</p>
+    <div 
+      class = "Tag">
+      <b>{{ comment.user.username }}</b> | <p class = "Tag">{{ comment.content }}</p>
+    </div>
+    <ArticleCommentUpdateForm
+      :key = "comment.id"
+      :comment-id = "comment.id"
+      :comment = "comment"
+      @update-status="handleUpdateStatus(comment.id, $event)"
+      class = "Tag"/>
     <button @click = "deleteComment(comment.id)">삭제</button>
     <ArticleDetailCommentLikeButton
       :key = "comment.id"
       :comment-id = "comment.id"
       :comment = "comment"/>
-    {{ comment.likes_user.length }}명이 좋아함
   </div>
 </template>
 
 <script setup>
+import ArticleCommentUpdateForm from '@/components/ArticleCommentUpdateForm.vue'
 import ArticleDetailCommentLikeButton from '@/components/ArticleDetailCommentLikeButton.vue'
 import { onMounted,computed } from 'vue'
 import { useArticleStore } from '@/stores/articles';
 import { useCounterStore } from '@/stores/counter';
-
+import { ref } from 'vue'
 const articleStore = useArticleStore()
 const counterStore = useCounterStore()
+
 
 const deleteComment = function(commentId) {
   articleStore.deleteComment(commentId)
@@ -31,20 +40,17 @@ const comments = computed(() => {
 })
 
 
+
 onMounted(() => {
   articleStore.getArticleComment()
 })
 
 
-
-
-
-
-
 </script>
 
 <style scoped>
-.pTag {
+.Tag {
   display: inline;
 }
+
 </style>

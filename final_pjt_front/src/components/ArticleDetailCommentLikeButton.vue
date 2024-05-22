@@ -1,7 +1,7 @@
 <template>
   <button @click="likeArticleComment(commentId)">
-    <span v-if = "isArticleCommentLike === false">🤍 좋아요</span>
-    <span v-else-if = "isArticleCommentLike === true">❤ 좋아요 취소</span>
+    <span v-if = "isArticleCommentLike === false">🤍</span>
+    <span v-else-if = "isArticleCommentLike === true">❤</span>
   </button>
 
 </template>

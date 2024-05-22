@@ -30,6 +30,10 @@
                 v-for = "comment in comments"
                 :key = "comment.id">
                 <b>{{ comment.user.username }}</b> | <p class = "pTag">{{ comment.content }}</p>
+                <MovieCardDetailModalCommentUpdateForm
+                  :key = "comment.id"
+                  :comment-id = "comment.id"
+                  :comment = "comment"/>
                 <MovieCardDetailModalCommentLikeButton
                   :key = "comment.id"
                   :comment-id = "comment.id"
@@ -47,6 +51,7 @@
 </template>
 
 <script setup>
+import MovieCardDetailModalCommentUpdateForm from '@/components/MovieCardDetailModalCommentUpdateForm.vue'
 import MovieCardDetailModalCommentLikeButton from './MovieCardDetailModalCommentLikeButton.vue'
 import MovieCardDetailModalStoreButton from './MovieCardDetailModalStoreButton.vue'
 import MovieCardDetailModalLikeButton from '@/components/MovieCardDetailModalLikeButton.vue'
