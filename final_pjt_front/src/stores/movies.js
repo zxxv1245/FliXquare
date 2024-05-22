@@ -201,6 +201,46 @@ export const useMoviestore = defineStore('movies', () => {
       })
   }
 
+  const movieComment = ref({})
+
+  const getMovieCommentDetail = function(commentId) {
+    axios({
+      method :'get',
+      url : `${API_URL}/api/v1/comments/${commentId}/`,
+      headers : {
+          Authorization : `Token ${counterStore.token}`
+        },
+    })
+      .then(res => {
+        // console.log('성공')
+        movieComment.value = res.data
+      })
+      .catch(e => {
+        console.log('실패')
+      })
+  }
+
+
+  // 영화 댓글 수정
+  const updateMovieComment = function(commentId,movieComment) {
+    axios({
+      method :'put',
+      url : `${API_URL}/api/v1/comments/${commentId}/`,
+      headers : {
+          Authorization : `Token ${counterStore.token}`
+        },
+      data : {content : movieComment.content}
+    })
+      .then(res => {
+        // console.log('성공')
+        getMovieComment()
+      })
+      .catch(e => {
+        console.log('실패')
+      })
+  }
+
+
   return {
     movies,
     latest,
@@ -208,6 +248,7 @@ export const useMoviestore = defineStore('movies', () => {
     apiMessages,
     recommend,
     allMovieComments,
+    movieComment,
     fillMovies,
     fillLatest,
     getGenre,
@@ -217,6 +258,8 @@ export const useMoviestore = defineStore('movies', () => {
     ChatGpt,
     getMovieComment,
     createMovieComment,
-    deleteComment
+    deleteComment,
+    updateMovieComment,
+    getMovieCommentDetail
   }
 }, { persist: true })

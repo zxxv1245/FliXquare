@@ -85,7 +85,7 @@ export const useArticleStore = defineStore('article', () => {
       })
   }
 
-  
+  // 게시글 수정
   const updateArticle = function(articleId,article) {
     axios({
       method : 'put',
@@ -181,6 +181,45 @@ export const useArticleStore = defineStore('article', () => {
   }
 
 
+  const articleComment = ref({})
+  // 단일 댓글 조회
+  const getArticleCommentDetail = function(commentId) {
+    axios({
+      method :'get',
+      url : `${API_URL}/api/v2/comments/${commentId}/`,
+      headers : {
+          Authorization : `Token ${counterStore.token}`
+        },
+    })
+      .then(res => {
+        // console.log('성공')
+        articleComment.value = res.data
+      })
+      .catch(e => {
+        console.log('실패')
+      })
+  }
+
+
+  // 댓글 수정
+  const updateArticleComment = function(commentId,articleComment) {
+    axios({
+      method :'put',
+      url : `${API_URL}/api/v2/comments/${commentId}/`,
+      headers : {
+          Authorization : `Token ${counterStore.token}`
+        },
+      data : {content : articleComment.content}
+    })
+      .then(res => {
+        // console.log('성공')
+        getArticleComment()
+      })
+      .catch(e => {
+        console.log('실패')
+      })
+  }
+
 
   return{
     article,
@@ -188,6 +227,7 @@ export const useArticleStore = defineStore('article', () => {
     API_URL,
     category,
     allComments,
+    articleComment,
     getArticles,
     getArticleDetail,
     createArticle,
@@ -197,5 +237,7 @@ export const useArticleStore = defineStore('article', () => {
     getArticleComment,
     createComment,
     deleteComment,
+    updateArticleComment,
+    getArticleCommentDetail
   }
 }, { persist: true })
