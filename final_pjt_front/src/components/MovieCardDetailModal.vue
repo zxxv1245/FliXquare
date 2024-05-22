@@ -13,7 +13,8 @@
                 <h2>{{movie.title}}</h2>
                 <MovieCardDetailModalStoreButton
                   :key = "movie.id"
-                  :movie-id = "movie.id"/>
+                  :movie-id = "movie.id"
+                  :movie="movie"/>
                 <MovieCardDetailModalLikeButton
                   :key = "movie.id"
                   :movie-id = "movie.id"

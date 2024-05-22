@@ -27,27 +27,26 @@ export const useMoviestore = defineStore('movies', () => {
 
   // 전체 영화 채우기 axios
   const fillMovies = function () {
-    if (movies.value.length === 0) {
-      axios({
-        method: 'GET',
-        url: `${API_URL}/api/v1/movies/`
+    axios({
+      method: 'GET',
+      url: `${API_URL}/api/v1/movies/`
+    })
+    .then((response) => {
+      movies.value = response.data
+      // popularity 기준으로 정렬함
+      movies.value.sort(function (a, b) {
+        if (a.popularity > b.popularity) {
+          return -1
+        }
+        if (a.popularity < b.popularity) {
+          return 1
+        }
+        return 0
       })
-      .then((response) => {
-        movies.value = response.data
-        // popularity 기준으로 정렬함
-        movies.value.sort(function (a, b) {
-          if (a.popularity > b.popularity) {
-            return -1
-          }
-          if (a.popularity < b.popularity) {
-            return 1
-          }
-          return 0
-        })
-        fillLatest()
-      })
+      fillLatest()
+    })
 
-    }
+
   }
   // 외부 Counter 불러오기
   const counterStore = useCounterStore()
