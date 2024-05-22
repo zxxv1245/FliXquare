@@ -11,13 +11,22 @@ import MovieCard from '@/components/MovieCard.vue'
 import { useMoviestore } from '@/stores/movies'
 import { useCounterStore } from '@/stores/counter'
 import { ref, onMounted, computed } from 'vue'
-
+import { NavigationFailureType } from 'vue-router';
 
 const movieStore = useMoviestore()
-const store = useCounterStore()
-const movies = movieStore.movies
+
+const myMovies = ref([])
+const counterStore = useCounterStore()
 
 
+onMounted(() => {
+  // console.log(counterStore.userId)
+  myMovies.value = movieStore.movies.filter((movie) => {
+    // console.log(movie.store_user)
+    return movie.store_user.includes(counterStore.userId)
+  });
+  console.log(myMovies.value);
+});
 
 </script>
 
