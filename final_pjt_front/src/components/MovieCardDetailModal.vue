@@ -20,7 +20,6 @@
               </div>
               <p>{{movie.overview}}</p>
               <h4>장르</h4>
-              <!-- <p>{{movie.genre_ids}}</p> -->
               <span v-for="id in movieStore.fillDetailGenre(movie.genre_ids)">{{ id }}</span>
             </div>
             <div class="col-5">

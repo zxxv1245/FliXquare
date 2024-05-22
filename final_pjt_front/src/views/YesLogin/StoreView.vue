@@ -17,10 +17,6 @@ const movieStore = useMoviestore()
 const store = useCounterStore()
 const movies = movieStore.movies
 
-onMounted(() => {
-
-})
-
 
 
 </script>

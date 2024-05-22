@@ -1,7 +1,7 @@
 <template>
   <button @click="likeMovie(movieId)">
-    <span v-if = "isMovieLike === false">🤍</span>
-    <span class = "red" v-else>❤</span>
+    <span v-if = "isMovieLike === false">좋아요</span>
+    <span class = "red" v-else>좋아요 취소</span>
   </button>
 </template>
 
