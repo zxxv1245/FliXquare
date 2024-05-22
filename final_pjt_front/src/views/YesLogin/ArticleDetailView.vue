@@ -7,11 +7,11 @@
     <h2>제목 : {{ article.title }}</h2>
     <p>내용 : {{ article.content }}</p>
     <p>작성일자 : {{ article.created_at?.substring(0, 10) }} {{ article.created_at?.substring(11, 19) }}</p>
-    {{ article.likes_user }}
+    <p>{{ article.likes_user.length }}명이 이 글을 좋아합니다.</p>
     <ArticleDetailLikeButton
       :key = "article.id"
       :article-id = "article.id"
-      :article = "article"/>
+      :article = "article"/> | 
     <button @click="updateArticle">수정</button> | 
     <button @click="deleteArticle">삭제</button>
     <hr>
@@ -62,7 +62,5 @@ const likeArticle = function() {
 div {
   color: white;
 }
-.red {
-  color: red;
-}
+
 </style>

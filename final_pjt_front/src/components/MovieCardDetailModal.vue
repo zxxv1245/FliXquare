@@ -16,7 +16,8 @@
                   :movie-id = "movie.id"/>
                 <MovieCardDetailModalLikeButton
                   :key = "movie.id"
-                  :movie-id = "movie.id"/>
+                  :movie-id = "movie.id"
+                  :movie = "movie"/>
               </div>
               <p>{{movie.overview}}</p>
               <h4>장르</h4>
@@ -31,7 +32,8 @@
                 <b>{{ comment.user.username }}</b> | <p class = "pTag">{{ comment.content }}</p>
                 <MovieCardDetailModalCommentLikeButton
                   :key = "comment.id"
-                  :comment-id = "comment.id"/>
+                  :comment-id = "comment.id"
+                  :comment = "comment"/>
                 <button @click = "deleteComment(comment.id)">삭제</button>
               </div>
               <MovieCardDetailModalCommentCreateForm

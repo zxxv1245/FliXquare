@@ -1,7 +1,7 @@
 <template>
   <button @click="likeArticleComment(commentId)">
-    <span v-if = "isArticleCommentLike === false">🤍</span>
-    <span class = "red" v-else-if = "isArticleCommentLike === true">❤</span>
+    <span v-if = "isArticleCommentLike === false">🤍 좋아요</span>
+    <span v-else-if = "isArticleCommentLike === true">❤ 좋아요 취소</span>
   </button>
 
 </template>
@@ -12,14 +12,15 @@ import { useArticleStore } from '@/stores/articles';
 import { useCounterStore } from '@/stores/counter';
 import axios from 'axios';
 const props = defineProps({
-  commentId : Number
+  commentId : Number,
+  comment : Object
 })
 
 const articleStore = useArticleStore()
 const counterStore = useCounterStore()
 
 // 게시글 댓글 좋아요
-const isArticleCommentLike =  ref(null)
+const isArticleCommentLike =  ref(false)
 
 
 const likeArticleComment = function(commentId) {
@@ -33,11 +34,20 @@ const likeArticleComment = function(commentId) {
   .then(res => {
     // console.log('성공')
     isArticleCommentLike.value = res.data.is_liked
+    articleStore.getArticleComment()
   })
   .catch(e => {
     console.log('실패')
   })
 }
+
+onMounted(() => {
+  if (props.comment.likes_user.includes(counterStore.userId)) {
+    isArticleCommentLike.value = true;
+  } else {
+    isArticleCommentLike.value = false;
+  }
+});
 
 </script>
 

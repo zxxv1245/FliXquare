@@ -1,17 +1,18 @@
 <template>
   <button @click="likeMovie(movieId)">
-    <span v-if = "isMovieLike === false">🤍</span>
-    <span class = "red" v-else>❤</span>
+    <span v-if = "isMovieLike === false">🤍[{{ movie.likes_user.length }}]</span>
+    <span class = "red" v-else>❤[{{ movie.likes_user.length }}]</span>
   </button>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref,onMounted } from 'vue'
 import { useMoviestore } from '@/stores/movies';
 import { useCounterStore } from '@/stores/counter';
 import axios from 'axios';
-defineProps({
-  movieId : Number
+const props = defineProps({
+  movieId : Number,
+  movie : Object
 })
 
 const movieStore = useMoviestore()
@@ -30,11 +31,22 @@ const isMovieLike = ref(null)
       .then(res => {
         // console.log('성공')
         isMovieLike.value = res.data.is_liked
+        movieStore.fillMovies();
       })
       .catch(e => {
         console.log('실패')
       })
   }
+
+  onMounted(() => {
+  if (props.movie.likes_user.includes(counterStore.userId)) {
+    isMovieLike.value = true;
+  } else {
+    isMovieLike.value = false;
+  }
+});
+
+
 
 </script>
 

@@ -30,6 +30,7 @@ const isMovieStore = ref(null)
       .then(res => {
         // console.log('성공')
         isMovieStore.value = res.data.is_liked
+        movieStore.fillMovies();
       })
       .catch(e => {
         console.log('실패')
