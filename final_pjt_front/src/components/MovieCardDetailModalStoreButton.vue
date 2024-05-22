@@ -1,7 +1,7 @@
 <template>
   <button @click="storeMovie(movieId)">
-    <span v-if="isMovieStore===false">찜하기</span>
-    <span v-else>찜해제</span>
+    <span v-if="isMovieStore===false">찜</span>
+    <span v-else>찜 해제</span>
   </button>
 </template>
 
@@ -19,7 +19,7 @@ const props = defineProps({
 const movieStore = useMoviestore()
 const counterStore = useCounterStore()
 
-// 게시글 좋아요
+// 영화 찜하기
 const isMovieStore = ref(null)
 const storeMovie = function(movieId) {
   axios({

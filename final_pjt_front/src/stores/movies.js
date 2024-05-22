@@ -9,8 +9,6 @@ export const useMoviestore = defineStore('movies', () => {
   const API_URL = 'http://127.0.0.1:8000'
   const OPEN_API_URL = 'https://api.openai.com/v1/chat/completions'
   // const API_KEY = '***REMOVED***'
-  // const API_KEY = ''
-  // const API_KEY = '***REMOVED***'
 
   // 전체 영화 목록
   const movies = ref([])
@@ -44,6 +42,7 @@ export const useMoviestore = defineStore('movies', () => {
         return 0
       })
       fillLatest()
+      getMovieTitle()
     })
 
 
@@ -62,7 +61,7 @@ export const useMoviestore = defineStore('movies', () => {
   const movieNames = ref([])
   const getMovieTitle = function() {
     movieNames.value = []
-    const temp = ref(movies.value.filter((movie) => movie.id <= 40))
+    const temp = ref(movies.value.filter((movie) => movie.id > 40 && movie.id <= 60))
     temp.value.forEach((movie) => {
       movieNames.value.push(movie.title)
     })
@@ -91,7 +90,7 @@ export const useMoviestore = defineStore('movies', () => {
   
   // API 요청할 message 채우기
   const apiMessages = computed(() => {
-    return `나는 [${userGenre.value}] 장르를 좋아해. 내가 가지고 있는 영화 목록은 [${movieNames.value}]가 있어. 이 중에 영화 제목 3개만 출력해줘.`    
+    return `나는 [${userGenre.value}] 장르를 좋아해. 내가 가지고 있는 영화 목록은 [${movieNames.value}]가 있어. 이 중에 영화 제목 6개만 출력해줘.`    
     })
 
   // 추천 영화 목록
@@ -99,6 +98,8 @@ export const useMoviestore = defineStore('movies', () => {
 
   // chatGPT API
   const ChatGpt = function(message) {
+    if (recommend.value.length === 0 && movieNames.value.length > 0) {
+      console.log('axios 요청에 들어간다.')
       axios({
         method: 'post', 
         url: OPEN_API_URL,
@@ -119,27 +120,25 @@ export const useMoviestore = defineStore('movies', () => {
         .then(res => {
         // 응답 데이터 확인 (크롬 개발자 도구 콘솔창)
           // 0. 요청 보내기 전 보낼 메세지를 확인한다.
-          console.log(apiMessages)
           // 1. 응답 데이터에서 응답 메세지를 가져온다.
           const message = ref(res.data.choices[0].message.content)
           console.log(message.value)
 
           // 2. 문자열을 배열로 변환 (GPT response 가공)
-          message.value = message.value.split('\n').map(line => line.replace(/^\d+\. /, '').trim())
+          message.value = message.value.split('\n').map(line => line.replace(/^\d+\.\s*/, '').trim());
           console.log('가공 데이터 :', message.value)
           
           // 3. 교집합 찾기
-          message.value.filter(word => movieNames.value.includes(word)).forEach((movieName) => {
-            recommend.value.push(movies.find((movie) => movie.title === movieName))
-          })
-          // modal object, recoomend : [(str:name), genre_ids (없음)]
+          recommend.value = movies.value.filter((movie) => 
+            message.value.some((title) => movie.title === title))
           console.log(recommend.value)
+          fillMovies()
         })
-        
         .catch(err => {
-          recommend.value = movies.value.slice(0,18)
+          recommend.value = movies.value.slice(44,50)
           console.log(err)
         })
+    }
   }
 
   const allMovieComments = ref([])

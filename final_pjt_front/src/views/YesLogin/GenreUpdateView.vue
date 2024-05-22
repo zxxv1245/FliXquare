@@ -49,12 +49,12 @@ onMounted(() => {
 
 const goMovie = function() {
   counterStore.removeGenre()
+  movieStore.ChatGpt(movieStore.apiMessages)
   setTimeout(() => {
     counterStore.addGenre()
     movieStore.getGenre()
     movieStore.getUserGenre()
-    // movieStore.ChatGpt(movieStore.apiMessages)
-  },1000)
+  }, 100)
   router.push({name : "MovieView"})
 }
 

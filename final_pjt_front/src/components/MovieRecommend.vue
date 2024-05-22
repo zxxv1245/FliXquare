@@ -22,8 +22,7 @@
   <div class="d-flex justify-content-center pt-2" aria-label="LatestView Page navigation">
     <button
     class="page-link"
-    id="nav-link"
-    v-for="page in numberPage">
+    id="nav-link">
       <button
       @click="c(page)"
       class="border bg-white py-1"
@@ -45,22 +44,9 @@ const length = ref(4)
 // 현재 페이지 값
 const pageNumber = ref(1)
 // 최대 페이지 값
-const numberPage = ref(Math.ceil(18/4))
 
 const c = function (p) {
   pageNumber.value = p
-}
-
-const increase = function () {
-  if (pageNumber.value < numberPage.value) {
-    pageNumber.value += 1
-  }
-}
-
-const decrease = function () {
-  if (pageNumber.value > 1) {
-    pageNumber.value -= 1
-  }
 }
 
 watch(pageNumber, (nextPage) => {
@@ -74,19 +60,16 @@ const Resize = function () {
   if (window.innerWidth > 1220) {
     length.value = 6
     recommend.value = movieStore.recommend.slice(0, length.value)
-    numberPage.value = Math.ceil(18/length.value)
   }
   // tablet 사이즈일때
   if ((window.innerWidth >= 768) && (window.innerWidth < 1024)) {
     length.value = 3
     recommend.value = movieStore.recommend.slice(0, length.value)
-    numberPage.value = Math.ceil(18/length.value)
   }
   // moblie 사이즈일때
   if (window.innerWidth < 768) {
     length.value = 2
     recommend.value = movieStore.recommend.slice(0, length.value)
-    numberPage.value = Math.ceil(18/length.value)
   }
 }
 

@@ -29,18 +29,18 @@
 import MovieCard from '@/components/MovieCard.vue';
 import { ref, watch } from 'vue'
 import { useMoviestore } from '@/stores/movies'
-const moviestore = useMoviestore()
+const movieStore = useMoviestore()
 
 // 현재 페이지
 const pageNumber = ref(1)
-const pageMovieList = ref(moviestore.latest.slice(0, 12))
+const pageMovieList = ref(movieStore.latest.slice(0, 12))
 
 // 최대값 계산
-moviestore.numberPage = Math.ceil(moviestore.latest.length/12)
+movieStore.numberPage = Math.ceil(movieStore.latest.length/12)
 
 // 초기 페이지 설정
 const pages = ref([pageNumber.value-2, pageNumber.value-1, pageNumber.value, pageNumber.value+1, pageNumber.value+2])
-pages.value = pages.value.filter((page) => page > 0 && page <= moviestore.numberPage)
+pages.value = pages.value.filter((page) => page > 0 && page <= movieStore.numberPage)
 
 // 클릭시 반응
 const c = function (p) {
@@ -50,19 +50,9 @@ const c = function (p) {
 // 클릭 : 반응형 페이지 변경 
 watch(pageNumber, (nextPage) => {
   pages.value = [nextPage-2, nextPage-1, nextPage, nextPage+1, nextPage+2]
-  pages.value = pages.value.filter((page) => page > 0 && page <= moviestore.numberPage)
-  pageMovieList.value = moviestore.latest.slice(12*(nextPage-1), 12*nextPage)
+  pages.value = pages.value.filter((page) => page > 0 && page <= movieStore.numberPage)
+  pageMovieList.value = movieStore.latest.slice(12*(nextPage-1), 12*nextPage)
 })
-
-
-
-
-
-
-// [0:12]
-// [12:24]
-// [24:36]
-
 
 </script>
 

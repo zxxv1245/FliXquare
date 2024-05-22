@@ -1,9 +1,11 @@
 <template>
-  <div class = "container border border-white">
-    <RouterLink :to = "{name : 'ArticleDetailView', params : {'articleId' : myArticle.id}}">{{ myArticle.title }}</RouterLink>
-    {{ myArticle.user.username }} | 
-    {{ myArticle.category.name }} | 
-    {{ myArticle.created_at.substring(0,10) }}
+  <div class = "container bg-danger border border-white rounded-pill mt-3 d-flex justify-content-between">
+    <RouterLink :to = "{name : 'ArticleDetailView', params : {'articleId' : myArticle.id}}" class="fs-5 text-white">{{ myArticle.title }}</RouterLink>
+    <span>
+      {{ myArticle.user.username }} | 
+      {{ myArticle.category.name }} | 
+      {{ myArticle.created_at.substring(0,10) }}
+    </span>
   </div>
 </template>
 

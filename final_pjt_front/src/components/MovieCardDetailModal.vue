@@ -9,24 +9,29 @@
           <div class="modal-body bg-gray-700 d-flex row">
             <div class="col-7">
               <!-- <iframe width="430px" height="300px" src="https://www.youtube.com/embed/4Y05XXdOwbo" frameborder="0"></iframe> -->
+              <div class="d-flex justify-content-center p-3">
+                <img :src="imgURL(movie.poster_path)" alt="poster" class="w-75">
+              </div>
               <div class="d-flex justify-content-between">
                 <h2>{{movie.title}}</h2>
-                <MovieCardDetailModalStoreButton
-                  :key = "movie.id"
-                  :movie-id = "movie.id"
-                  :movie="movie"/>
-                <MovieCardDetailModalLikeButton
-                  :key = "movie.id"
-                  :movie-id = "movie.id"
-                  :movie = "movie"/>
+                <div>
+                  <MovieCardDetailModalStoreButton
+                    :key = "movie.id"
+                    :movie-id = "movie.id"
+                    :movie="movie"/>
+                  <MovieCardDetailModalLikeButton
+                    :key = "movie.id"
+                    :movie-id = "movie.id"
+                    :movie = "movie"/>
+                </div>
               </div>
               <p>{{movie.overview}}</p>
               <h4>장르</h4>
               <span v-for="id in movieStore.fillDetailGenre(movie.genre_ids)">{{ id }}</span>
             </div>
-            <div class="col-5">
+            <div class="col-5 border-start border-danger position-relative">
               <h3 class="text-center">영화 댓글</h3>
-              <div 
+              <div
                 v-for = "comment in comments"
                 :key = "comment.id">
                 <b>{{ comment.user.username }}</b> | <p class = "pTag">{{ comment.content }}</p>
@@ -37,6 +42,7 @@
                 <button @click = "deleteComment(comment.id)">삭제</button>
               </div>
               <MovieCardDetailModalCommentCreateForm
+                class="position-absolute bottom-0"
                 :movie = "movie"/>
             </div>
           </div>
@@ -56,11 +62,15 @@ import { onMounted,computed } from 'vue'
 
 
 const movieStore = useMoviestore()
-const genreList = movieStore.genres
+// const genreList = movieStore.genres
 
 const props = defineProps({
   movie: Object
 })
+
+const imgURL = (path, size = 400) => {
+  return `https://image.tmdb.org/t/p/w${size}${path}`
+}
 
 const comments = computed(() => {
   return movieStore.allMovieComments.filter((comment) => props.movie.id === comment.movie)
