@@ -1,8 +1,8 @@
 <template>
-  <button @click="likeArticle(articleId)">
-    <span v-if = "isArticleLike === false">🤍 좋아요</span>
-    <span v-else-if = "isArticleLike === true">❤ 좋아요 취소</span>
-  </button>
+  <p @click="likeArticle(articleId)">
+    <span v-if = "isArticleLike === false">🤍</span>
+    <span class = "red" v-else-if = "isArticleLike === true">❤</span>
+  </p>
 </template>
 
 <script setup>
@@ -21,9 +21,6 @@ const counterStore = useCounterStore()
 
 // 게시글 좋아요
 const isArticleLike = ref(false)
-
-
-
 
 const likeArticle = function(articleId) {
   axios({
@@ -55,5 +52,13 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
+p {
+  margin: 0px;
+  padding-bottom: 0px;
+  border: 0px;
+}
+.red {
+  color: red;
+  
+}
 </style>

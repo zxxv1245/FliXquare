@@ -46,6 +46,9 @@ const maxNumber = ref(1)
 const pageMovieList = ref([])
 const pages = ref([])
 
+
+
+
 onMounted(() => {
   // console.log(counterStore.userId)
   myMovies.value = movieStore.movies.filter((movie) => {

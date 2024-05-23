@@ -2,21 +2,35 @@
   <div 
     v-for = "comment in comments"
     :key = "comment.id">
-    <div 
-      class = "Tag">
-      <b>{{ comment.user.username }}</b> | <p class = "Tag">{{ comment.content }}</p>
+    <div class="d-flex justify-content-between">
+      <div>
+        <span>
+          {{ comment.user.username }} |
+        </span>
+        <span>
+          {{ comment.content }}
+        </span>
+      </div>
+      <div>
+        <div class="d-flex">
+          <ArticleCommentUpdateForm
+            :key = "comment.id"
+            :comment-id = "comment.id"
+            :comment = "comment"
+            @update-status="handleUpdateStatus(comment.id, $event)"
+            class = "Tag mx-2"
+            v-if = "comment.user.id === counterStore.userId"/>
+            <div class="Tag">
+                <ArticleDetailCommentLikeButton
+                  :key = "comment.id"
+                  :comment-id = "comment.id"
+                  :comment = "comment"
+                  class = "me-2 text-center"/>
+                <p class = "ms-1 fts">{{ comment.likes_user.length }}</p>
+            </div>
+        </div>
+      </div>
     </div>
-    <ArticleCommentUpdateForm
-      :key = "comment.id"
-      :comment-id = "comment.id"
-      :comment = "comment"
-      @update-status="handleUpdateStatus(comment.id, $event)"
-      class = "Tag"/>
-    <button @click = "deleteComment(comment.id)">삭제</button>
-    <ArticleDetailCommentLikeButton
-      :key = "comment.id"
-      :comment-id = "comment.id"
-      :comment = "comment"/>
   </div>
 </template>
 
@@ -29,11 +43,6 @@ import { useCounterStore } from '@/stores/counter';
 import { ref } from 'vue'
 const articleStore = useArticleStore()
 const counterStore = useCounterStore()
-
-
-const deleteComment = function(commentId) {
-  articleStore.deleteComment(commentId)
-}
 
 const comments = computed(() => {
   return articleStore.allComments.filter((comment) => articleStore.article.id === comment.article)
@@ -53,4 +62,7 @@ onMounted(() => {
   display: inline;
 }
 
+.fts {
+  font-size: 12px;
+}
 </style>

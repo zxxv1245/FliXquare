@@ -7,46 +7,61 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body bg-gray-700 d-flex row">
-            <div class="col-7">
+            <div class="col-6">
               <!-- <iframe width="430px" height="300px" src="https://www.youtube.com/embed/4Y05XXdOwbo" frameborder="0"></iframe> -->
               <div class="d-flex justify-content-center p-3">
                 <img :src="imgURL(movie.poster_path)" alt="poster" class="w-75">
               </div>
               <div class="d-flex justify-content-between">
-                <h2>{{movie.title}}</h2>
-                <div>
+                <h2 class="me-1">{{movie.title}}</h2>
+                <div class="d-flex">
                   <MovieCardDetailModalStoreButton
                     :key = "movie.id"
                     :movie-id = "movie.id"
-                    :movie="movie"/>
+                    :movie="movie"
+                    class="btn btn-dark"
+                    id="btn"
+                    />
                   <MovieCardDetailModalLikeButton
                     :key = "movie.id"
                     :movie-id = "movie.id"
-                    :movie = "movie"/>
+                    :movie = "movie"
+                    id="btn"
+                    class="btn btn-dark ms-2"
+                    />
                 </div>
               </div>
               <p>{{movie.overview}}</p>
               <h4>장르</h4>
               <span v-for="id in movieStore.fillDetailGenre(movie.genre_ids)">{{ id }}</span>
             </div>
-            <div class="col-5 border-start border-danger position-relative">
+            <div class="col-6 border-start border-white position-relative">
               <h3 class="text-center">영화 댓글</h3>
               <div
                 v-for = "comment in comments"
-                :key = "comment.id">
-                <b>{{ comment.user.username }}</b> | <p class = "pTag">{{ comment.content }}</p>
-                <MovieCardDetailModalCommentUpdateForm
-                  :key = "comment.id"
-                  :comment-id = "comment.id"
-                  :comment = "comment"/>
-                <MovieCardDetailModalCommentLikeButton
-                  :key = "comment.id"
-                  :comment-id = "comment.id"
-                  :comment = "comment"/>
-                <button @click = "deleteComment(comment.id)">삭제</button>
+                :key = "comment.id"
+                class = "d-flex justify-content-between">
+                <div class = "Tag">
+                  <b>{{ comment.user.username }}</b> | <p class = "Tag">{{ comment.content }}</p>
+                </div>
+                <div class = "Tag d-flex">
+                  <MovieCardDetailModalCommentUpdateForm
+                    :key = "comment.id"
+                    :comment-id = "comment.id"
+                    :comment = "comment"
+                    class = "Tag"/>
+                  <div class = "Tag text-center ms-2">
+                    <MovieCardDetailModalCommentLikeButton
+                      :key = "comment.id"
+                      :comment-id = "comment.id"
+                      :comment = "comment"
+                      />
+                    <p class = "fts">{{ comment.likes_user.length }}</p>
+                  </div>
+                </div>
               </div>
               <MovieCardDetailModalCommentCreateForm
-                class="position-absolute bottom-0"
+                class="position-absolute bottom-0 w-100"
                 :movie = "movie"/>
             </div>
           </div>
@@ -81,19 +96,11 @@ const comments = computed(() => {
   return movieStore.allMovieComments.filter((comment) => props.movie.id === comment.movie)
 })
 
-const deleteComment = function(commentId) {
-  movieStore.deleteComment(commentId)
-}
+
 
 onMounted(() => {
   movieStore.getMovieComment()
 })
-
-
-
-
-
-// const genres = movieStore.fillDetailGenre()
 
 </script>
 
@@ -110,7 +117,15 @@ span {
   padding-right: 24px;
 }
 
-.pTag {
+.Tag {
   display: inline;
 }
+.fts {
+  font-size: 12px;
+}
+
+#btn {
+  height: 40px;
+}
+
 </style>

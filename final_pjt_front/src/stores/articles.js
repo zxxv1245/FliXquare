@@ -21,6 +21,14 @@ export const useArticleStore = defineStore('article', () => {
     })
     .then(res => {
       articles.value = res.data
+      articles.value = articles.value.sort(function(a, b) {
+        if (a.created_at > b.created_at) {
+          return -1
+        } if (a.created_at < b.created_at) {
+          return 1
+        }
+        return 0
+      })
     })
     .catch(e => {
       console.log(e)

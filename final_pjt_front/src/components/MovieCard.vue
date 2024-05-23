@@ -2,7 +2,7 @@
   <div class="d-block">
     <div>
       <button type="button" data-bs-toggle="modal" :data-bs-target="'#DetailModal-'+movie.id" class="btn p-0" @click = "getMovieComment">
-        <img :src="imgURL(movie.poster_path)" alt="{{movie.title}}_poster_path_img">
+        <img :src="imgURL(movie.poster_path)" alt="{{movie.title}}_poster_path_img" class="rounded">
       </button>
     </div>
     

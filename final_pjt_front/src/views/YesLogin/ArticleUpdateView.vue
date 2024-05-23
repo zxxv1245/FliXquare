@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>ArticleUpdateView</h1>
     <ArticleUpdateForm
       :article = "article"/>
   </div>
@@ -34,5 +33,7 @@ axios({
 </script>
 
 <style scoped>
-
+div {
+  color: white;
+}
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <button @click="likeMovieComment(commentId)">
-    <span v-if = "isMovieCommentLike === false">🤍좋아요</span>
-    <span class = "red" v-else>❤좋아요 취소</span>
-  </button>
+  <p @click="likeMovieComment(commentId)" class = "pTag">
+    <span v-if = "isMovieCommentLike === false">❤</span>
+    <span class="red" v-else>❤</span>
+  </p>
 </template>
 
 <script setup>
@@ -50,5 +50,11 @@ const isMovieCommentLike = ref(false)
 </script>
 
 <style scoped>
+.pTag {
+  display: inline;
+}
+.red {
+  color: red;
+}
 
 </style>

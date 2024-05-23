@@ -1,8 +1,8 @@
 <template>
   <div class = "profileMainInfoTopDiv d-flex flex-column align-items-center">
     <img src="@/assets/profileimg.jpg" alt="" class = "profileimgClass my-3">
-    <h2>{{ counterStore.userName }}</h2>
-    <div class="my-3">
+    <h2 class = "my-5">{{ counterStore.userName }}</h2>
+    <div class="my-5">
       <button class = "childbtn" @click = "goGenreUpdate">
         <p class = "profileMainInfopTag">{{ counterStore.userGenre[0].name }}</p>
         <p class = "profileMainInfopTag">{{ counterStore.userGenre[1].name }}</p>
@@ -35,6 +35,8 @@ const goStore = function() {
   width: 300px;
   border-radius: 50%;
 }
+
+
 
 .profileMainInfoTopDiv {
   color: white;

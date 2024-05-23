@@ -16,7 +16,7 @@ import LoginForm from '@/components/LoginForm.vue';
 }
 
 .thisisimg {
-  height: 700px;
+  height: 950px;
   background-image: url('@/assets/backgroundimg.jpg');
   background-size: cover;
   color: white;

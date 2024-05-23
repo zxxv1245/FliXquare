@@ -1,8 +1,8 @@
 <template>
   <div>
-    <form @submit.prevent = 'createMovieComment'>
-      <input type="text" name="" id="" v-model = "content" >
-      <input type="submit" value = "작성">
+    <form @submit.prevent = 'createMovieComment' class="d-flex justify-content-between">
+      <input type="text" v-model = "content" class = "input w-75 ms-2" >
+      <button type = "submit" class="btn btn-danger me-4 px-3">↩</button>
     </form>
   </div>
 </template>
@@ -30,5 +30,11 @@ const createMovieComment = function() {
 </script>
 
 <style scoped>
+.input {
+  border-radius: 5px;
+}
 
+.btn {
+  border-radius: 5px;
+}
 </style>

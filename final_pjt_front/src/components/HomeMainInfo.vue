@@ -20,7 +20,7 @@
   font-size: 30px;
 }
 .thisisimg {
-  height: 600px;
+  height: 800px;
   background-image: url('@/assets/backgroundimg.jpg');
   background-size: cover;
   color: white;

@@ -1,7 +1,7 @@
 <template>
   <button @click="storeMovie(movieId)">
-    <span v-if="isMovieStore===false">찜</span>
-    <span v-else>찜 해제</span>
+    <div v-if="isMovieStore===false">★</div>
+    <div v-else class="text-warning">★</div>
   </button>
 </template>
 

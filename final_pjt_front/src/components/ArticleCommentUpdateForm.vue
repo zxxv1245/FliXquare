@@ -1,9 +1,10 @@
 <template>
   <div>
-    <button @click = "Updated" :class = "{isnone : !isUpdated}">수정</button>
+    <button @click = "Updated" :class = "{isnone : !isUpdated}" class="btn btn-danger ms-3 p-1">수정</button>
     <form @submit.prevent = "updateArticleComment" :class = "{isnone : isUpdated}">
-      <input name="" id="content" v-model = "content">
-      <input type="submit" value="완료">
+      <input name="" id="content" v-model.trim = "content" class = "input">
+      <button type = "submit" class="btn btn-danger ms-3 p-1">완료</button>
+      <button @click = "deleteComment(comment.id)" class="btn btn-danger ms-1 p-1">삭제</button>
     </form>
   </div>
 </template>
@@ -23,6 +24,10 @@ const route = useRoute()
 const articleStore = useArticleStore()
 
 const content = ref(null)
+
+const deleteComment = function(commentId) {
+  articleStore.deleteComment(commentId)
+}
 
 const loadArticleComment = async () => {
   const commentId = props.commentId;
@@ -58,5 +63,11 @@ const Updated = function() {
 <style scoped>
 .isnone {
   display: none;
+}
+.input {
+  border-radius: 5px;
+}
+.btn {
+  border-radius: 5px;
 }
 </style>

@@ -1,9 +1,10 @@
 <template>
   <div>
-    <button @click = "Updated" :class = "{isnone : !isUpdated}">수정</button>
+    <button @click = "Updated" :class = "{isnone : !isUpdated}" class = "btn btn-danger ms-2 p-1">수정</button>
     <form @submit.prevent = "updateMovieComment" :class = "{isnone : isUpdated}">
-      <input name="" id="content" v-model = "content">
-      <input type="submit" value="완료">
+      <input name="" id="content" v-model = "content" class = "input">
+      <button type = "submit" class="btn btn-danger ms-2 p-1">완료</button>
+      <button @click = "deleteComment(comment.id)" class="btn btn-danger ms-2 p-1">삭제</button>
     </form>
   </div>
 </template>
@@ -23,6 +24,10 @@ const route = useRoute()
 const movieStore = useMoviestore()
 
 const content = ref(null)
+
+const deleteComment = function(commentId) {
+  movieStore.deleteComment(commentId)
+}
 
 const loadMovieComment = async () => {
   const commentId = props.commentId;
@@ -58,5 +63,13 @@ const Updated = function() {
 <style scoped>
 .isnone {
   display: none;
+  
+}
+.input {
+  border-radius: 5px;
+  width: 8vw;
+}
+.btn {
+  border-radius: 5px;
 }
 </style>

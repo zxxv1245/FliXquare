@@ -1,6 +1,6 @@
 <template>
   <button @click="likeMovie(movieId)">
-    <span v-if = "isMovieLike === false" class="text-black">♡</span>
+    <span v-if = "isMovieLike === false">❤</span>
     <span class="text-danger" v-else>❤</span>
   </button>
 </template>

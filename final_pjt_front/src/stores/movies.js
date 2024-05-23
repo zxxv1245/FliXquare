@@ -8,7 +8,7 @@ import axios from 'axios'
 export const useMoviestore = defineStore('movies', () => {
   const API_URL = 'http://127.0.0.1:8000'
   const OPEN_API_URL = 'https://api.openai.com/v1/chat/completions'
-  // const API_KEY = '***REMOVED***'
+  const API_KEY = '***REMOVED***'
 
   // 전체 영화 목록
   const movies = ref([])
@@ -17,6 +17,24 @@ export const useMoviestore = defineStore('movies', () => {
   
   // 장르 목록
   const genres = ref([])
+
+  const popularList = ref([])
+
+  const fillPopular = function() {
+    popularList.value = movies.value.slice()
+    popularList.value.sort(function (a, b) {
+      if (a.likes_user.length > b.likes_user.length) {
+        return -1
+      }
+      if (a.likes_user.length < b.likes_user.length) {
+        return 1
+      }
+      return 0
+    })
+    popularList.value = popularList.value.slice(0,10)
+  }
+
+
 
   // 전체 최신 영화 채우기
   const fillLatest = function () {
@@ -43,6 +61,8 @@ export const useMoviestore = defineStore('movies', () => {
       })
       fillLatest()
       getMovieTitle()
+      fillPopular()
+
     })
 
 
@@ -136,6 +156,7 @@ export const useMoviestore = defineStore('movies', () => {
         })
         .catch(err => {
           recommend.value = movies.value.slice(44,50)
+          fillMovies()
           console.log(err)
         })
     }
@@ -239,6 +260,14 @@ export const useMoviestore = defineStore('movies', () => {
         console.log('실패')
       })
   }
+  const myMovies = ref([])
+  const getmyMovies = function() {
+    myMovies.value = movies.value.filter((movie) => {
+      // console.log(movie.store_user)
+      return movie.store_user.includes(counterStore.userId)
+    });
+  }
+
 
 
   return {
@@ -247,6 +276,7 @@ export const useMoviestore = defineStore('movies', () => {
     genres,
     apiMessages,
     recommend,
+    popularList,
     allMovieComments,
     movieComment,
     fillMovies,
@@ -260,6 +290,6 @@ export const useMoviestore = defineStore('movies', () => {
     createMovieComment,
     deleteComment,
     updateMovieComment,
-    getMovieCommentDetail
+    getMovieCommentDetail,
   }
 }, { persist: true })

@@ -1,6 +1,5 @@
 <template>
-  <div class = "container border border-white">
-    <h1>게시글 작성</h1>
+  <div class = "container">
     <ArticleCreateForm/> 
   </div>
 </template>

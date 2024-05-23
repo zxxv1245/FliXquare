@@ -16,7 +16,7 @@ import SignupForm from '@/components/SignupForm.vue';
   align-items: center;    /* 세로 가운데 정렬 */
 }
 .thisisimg {
-  height: 700px;
+  height: 950px;
   background-image: url('@/assets/backgroundimg.jpg');
   background-size: cover;
   color: white;

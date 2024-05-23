@@ -1,8 +1,8 @@
 <template>
   <div>
-    <form @submit.prevent = 'createComment'>
-      <input type="text" name="" id="" v-model = "content">
-      <input type="submit" value = "작성">
+    <form @submit.prevent = 'createComment' class="d-flex">
+      <input type="text" v-model.trim = "content" class = "input w-100">
+      <button type = "submit" class="btn btn-danger ms-3 p-1">↩</button>
     </form>
   </div>
 </template>
@@ -22,5 +22,11 @@ const createComment = function() {
 </script>
 
 <style scoped>
+.input {
+  border-radius: 5px;
+}
 
+.btn {
+  border-radius: 5px;
+}
 </style>

@@ -1,9 +1,8 @@
 <template>
-  <button @click="likeArticleComment(commentId)">
-    <span v-if = "isArticleCommentLike === false">🤍</span>
-    <span v-else-if = "isArticleCommentLike === true">❤</span>
-  </button>
-
+  <p @click="likeArticleComment(commentId)" class = "pTag">
+    <span v-if = "isArticleCommentLike === false">❤</span>
+    <span class = "red" v-else-if = "isArticleCommentLike === true">❤</span>
+  </p>
 </template>
 
 <script setup>
@@ -52,5 +51,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.red {
+  color: red;
+}
 
+
+.pTag {
+  display: inline;
+}
 </style>

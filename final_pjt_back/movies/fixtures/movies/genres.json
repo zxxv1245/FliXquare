@@ -117,12 +117,5 @@
     "fields" : {
       "name": "전쟁"
     }
-  },
-  {
-    "model": "movies.Genre",
-    "pk": 37,
-    "fields" : {
-      "name": "서부"
-    }
   }
 ]
