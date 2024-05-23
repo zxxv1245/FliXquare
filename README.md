@@ -44,10 +44,10 @@
 | /profile | ProfileView | 프로필 페이지 | ProfileMainInfo |
 | /profileupdate | ProfileUpdateView | 프로필 수정 페이지 | ProfileUpdateForm |
 | /genreupdate | GenreUpdateView | 장르 선택/수정 페이지 |  |
-| /store | StoreView | 내 찜 목록 페이지 | MovieCard,MovieCardDetailModal,MovieCardDetailModalLikeButton,MovieCardDetailModalCommentLikeButton,MovieCardDetailModalStoreButton |
+| /store | StoreView | 내 찜 목록 페이지 | MovieCard,MovieCardDetailModal,MovieCardDetailModalLikeButton,MovieCardDetailModalCommentLikeButton,MovieCardDetailModalStoreButton,MovieCardDetailModalCommentUpdateForm |
 | /articles | ArticlesView | 커뮤니티 메인 페이지 | ArticleCard |
 | /articlecreate | ArticleCreateView | 게시글 생성 페이지 | ArticleCreateForm |
-| /articledetail/:articleId | ArticleDetailView | 게시글 상세 정보 페이지 | ArticleDetailComment,ArticleDetailCommentCreateForm,ArticleDetailLikeButton,ArticleDetailCommentLikeButton |
+| /articledetail/:articleId | ArticleDetailView | 게시글 상세 정보 페이지 | ArticleDetailComment,ArticleDetailCommentCreateForm,ArticleDetailLikeButton,ArticleDetailCommentLikeButton,ArticleDetailCommentUpdateForm |
 | /articleupdate/:articleId | ArticleUpdateView | 게시글 수정 페이지 | ArticleUpdateForm |
 
 ![](./erd/pic.jpg)
@@ -60,10 +60,10 @@
             - 최신 영화 소식, 리뷰, 토론 그리고 더 많은 것들을 즐기세요.
         - **SubInfo1 : “최신 인기영화를 한눈에!”**
             - 최신 흥행작부터 기대작 예고, 각종 영화 이야기까지 한눈에! 유저 기반 다양한 영화 소식을 쉽고 빠르게 접할 수 있습니다!
-        - **SubInfo2 : “”**
-            - 
-        - **SubInfo2 : “”**
-            - 
+        - **SubInfo2 : “민철 주호 Let's Go”**
+            - 광주 1반 최고
+        - **SubInfo2 : “무엇을 넣어야할까”**
+            - 무엇을... 무엇을 ... 무엇을 ...
     - SignupView (SignupView) → (Components) Signup Form 활용(submit 이후 router.push) [ Children : Genre_select / user-genre table을 통해서 유저 맞춤 추천 장르 3개 선택 ]
     - LoginView (LoginView) → (Components) Login Form 활용
 
@@ -71,9 +71,9 @@
 
 - **네비게이션 바 (메인 페이지, 최신 영화 리스트, 인기 영화 리스트, 찜한 목록, 프로필)**
     - MainView (MovieView) → (Components) UserRecommend, Latest, Top 10, Genre 1, 2, 3
-    - LatestView (LatestView) → (Components) Page 당 10 영화 렌더
-    - PopularView (PopularView) → (Components) Page 당 10 영화 렌더 (기존 MovieList + 좋아요 우선 순위)
-    - FavoriteView(FavoriteView) → (Components) Page 당 10 영화 렌더 (기존 찜 목록 추가, 제거 방식)
+    - LatestView (LatestView) → (Components) Page 당 18 영화 렌더
+    - PopularView (PopularView) → (Components) Page 당 18 영화 렌더 (기존 MovieList + 좋아요 우선 순위)
+    - FavoriteView(FavoriteView) → (Components) Page 당 18 영화 렌더 (기존 찜 목록 추가, 제거 방식)
     - ArticlesView(ArticlesView) → (Components) 자유게시판, 리뷰게시판
     - ProfileView (ProfileView) → MainInfo(Components), InfoUpdate(View), GenreUpdate(View), StoreView(RouteLink)
         - 내 글 보기(Components)
@@ -151,6 +151,10 @@
             - [x]  카테고리에 있는 Section
             - [x]  Section별 페이지화 (20% 진행(nav 제작 완료), watched (적용 중…), v-for, splice로 렌더되는 것 조절하기 )
     - [x]  ERD 수정 (물리 이름, 타입, 테이블 추가 등)
+
+- 이후 일정은 Notion 
+
+
 
 ## 3. 데이터베이스 모델링 (ERD) (24.05.17 진행)
 ![](./erd/erd.png)
