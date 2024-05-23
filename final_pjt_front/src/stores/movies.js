@@ -81,7 +81,7 @@ export const useMoviestore = defineStore('movies', () => {
   const movieNames = ref([])
   const getMovieTitle = function() {
     movieNames.value = []
-    const temp = ref(movies.value.filter((movie) => movie.id > 40 && movie.id <= 60))
+    const temp = ref(movies.value.filter((movie) => movie.id > 20 && movie.id <= 40))
     temp.value.forEach((movie) => {
       movieNames.value.push(movie.title)
     })
@@ -267,8 +267,6 @@ export const useMoviestore = defineStore('movies', () => {
       return movie.store_user.includes(counterStore.userId)
     });
   }
-
-
 
   return {
     movies,

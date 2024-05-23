@@ -57,7 +57,7 @@ const goMovie = function () {
     movieStore.getUserGenre()
     counterStore.addGenre()
     movieStore.getGenre()
-    // movieStore.ChatGpt(movieStore.apiMessages)
+    movieStore.ChatGpt(movieStore.apiMessages)
     // 시현할 때, 풀면 됨
   }, 100)
 

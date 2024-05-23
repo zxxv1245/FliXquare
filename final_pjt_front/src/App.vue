@@ -26,10 +26,11 @@
 
 <script setup>
 import { computed, onMounted } from 'vue'
-import { useMoviestore } from './stores/movies';
+import { useMoviestore } from '@/stores/movies';
 import { RouterLink, RouterView } from 'vue-router'
 import { useRoute, useRouter } from 'vue-router';
 import { useCounterStore } from './stores/counter';
+
 
 const movieStore = useMoviestore()
 const store = useCounterStore()

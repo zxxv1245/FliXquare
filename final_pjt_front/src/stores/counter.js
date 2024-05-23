@@ -115,6 +115,7 @@ export const useCounterStore = defineStore('counter', () => {
       userId.value = null
       userName.value = null
       userGenre.value = []
+      movieStore.recommend = []
     }
     
     // DB에 저장
