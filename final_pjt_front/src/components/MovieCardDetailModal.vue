@@ -49,7 +49,8 @@
                     :key = "comment.id"
                     :comment-id = "comment.id"
                     :comment = "comment"
-                    class = "Tag"/>
+                    class = "Tag"
+                    v-if = "counterStore.userId === comment.user.id"/>
                   <div class = "Tag text-center ms-2">
                     <MovieCardDetailModalCommentLikeButton
                       :key = "comment.id"
@@ -79,8 +80,9 @@ import MovieCardDetailModalLikeButton from '@/components/MovieCardDetailModalLik
 import MovieCardDetailModalCommentCreateForm from '@/components/MovieCardDetailModalCommentCreateFom.vue'
 import { useMoviestore } from '@/stores/movies'
 import { onMounted,computed } from 'vue'
+import { useCounterStore } from '@/stores/counter'
 
-
+const counterStore = useCounterStore()
 const movieStore = useMoviestore()
 // const genreList = movieStore.genres
 

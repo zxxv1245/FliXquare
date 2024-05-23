@@ -89,7 +89,7 @@ export const useArticleStore = defineStore('article', () => {
         router.push({name : 'ArticlesView'})
       })
       .catch(e => {
-        // console.log(e)
+        console.log(e)
       })
   }
 
@@ -166,7 +166,7 @@ export const useArticleStore = defineStore('article', () => {
 
       })
       .catch(e => {
-        console.log('실패')
+        console.log(e)
       })
   }
   
@@ -184,7 +184,7 @@ export const useArticleStore = defineStore('article', () => {
         getArticleComment()
       })
       .catch(e => {
-        console.log('실패')
+        console.log(e)
       })
   }
 
@@ -204,7 +204,7 @@ export const useArticleStore = defineStore('article', () => {
         articleComment.value = res.data
       })
       .catch(e => {
-        console.log('실패')
+        console.log(e)
       })
   }
 
@@ -224,7 +224,7 @@ export const useArticleStore = defineStore('article', () => {
         getArticleComment()
       })
       .catch(e => {
-        console.log('실패')
+        console.log(e)
       })
   }
 

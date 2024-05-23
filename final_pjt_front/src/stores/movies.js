@@ -142,16 +142,15 @@ export const useMoviestore = defineStore('movies', () => {
           // 0. 요청 보내기 전 보낼 메세지를 확인한다.
           // 1. 응답 데이터에서 응답 메세지를 가져온다.
           const message = ref(res.data.choices[0].message.content)
-          console.log(message.value)
-
+          // console.log(message.value)
           // 2. 문자열을 배열로 변환 (GPT response 가공)
           message.value = message.value.split('\n').map(line => line.replace(/^\d+\.\s*/, '').trim());
-          console.log('가공 데이터 :', message.value)
+          // console.log('가공 데이터 :', message.value)
           
           // 3. 교집합 찾기
           recommend.value = movies.value.filter((movie) => 
             message.value.some((title) => movie.title === title))
-          console.log(recommend.value)
+          // console.log(recommend.value)
           fillMovies()
         })
         .catch(err => {

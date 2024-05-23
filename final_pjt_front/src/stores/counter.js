@@ -35,7 +35,7 @@ export const useCounterStore = defineStore('counter', () => {
         genres.value = dummyGenres.value
       })
       .catch(e => {
-        console.log('실패',e)
+        // console.log('실패',e)
       })
     }
 
@@ -71,7 +71,7 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
       .then((response) => {
-      console.log('회원가입 성공!')
+      // console.log('회원가입 성공!')
       const password = password1
       logIn({ username, password })
       })
@@ -94,7 +94,7 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then((response) => {
         //3. 로그인 성공 후 응답 받은 토큰을 저장
-        console.log('로그인 성공!')
+        // console.log('로그인 성공!')
         token.value = response.data.key
         getUser()
         movieStore.getGenre()
@@ -133,7 +133,7 @@ export const useCounterStore = defineStore('counter', () => {
         getuserGenre()
       })
       .catch(e => {
-        console.log('getUser 실패ㅜ',e)
+        // console.log('getUser 실패ㅜ',e)
       })
   }
 
