@@ -10,7 +10,6 @@ export const useMoviestore = defineStore(
   () => {
     const API_URL = "http://127.0.0.1:8000";
     const OPEN_API_URL = "https://api.openai.com/v1/chat/completions";
-    const API_KEY = "api_key";
 
     // 전체 영화 목록
     const movies = ref([]);
